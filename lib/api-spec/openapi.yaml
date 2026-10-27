@@ -1,0 +1,623 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 1.0.0
+  description: Kaguya Telegram bot and protected administration panel
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Public service health
+  - name: dashboard
+    description: Protected dashboard data
+  - name: groups
+    description: Telegram group administration
+  - name: moderation
+    description: Telegram sanctions and permission restoration
+  - name: settings
+    description: Bot and group settings
+  - name: content
+    description: Templates, phrases, GIFs, reminders and sources
+  - name: activity
+    description: Administrative audit log
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns service health without exposing secrets
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [dashboard]
+      summary: Get dashboard summary
+      responses:
+        "200":
+          description: Dashboard metrics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /groups:
+    get:
+      operationId: listGroups
+      tags: [groups]
+      summary: List Telegram groups known to the bot
+      responses:
+        "200":
+          description: Groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TelegramGroup"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /groups/{groupId}/members:
+    get:
+      operationId: listGroupMembers
+      tags: [groups]
+      summary: List members seen by Kaguya in a group
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: search
+          in: query
+          required: false
+          schema: { type: string, maxLength: 100 }
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 100, default: 100 }
+        - name: offset
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0, maximum: 1000000, default: 0 }
+      responses:
+        "200":
+          description: Known members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GroupMember"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /groups/{groupId}/sanctions:
+    get:
+      operationId: listSanctions
+      tags: [moderation]
+      summary: List sanctions for a group
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [active, expired, reversed, all]
+            default: active
+      responses:
+        "200":
+          description: Sanctions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sanction"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createSanction
+      tags: [moderation]
+      summary: Apply a Telegram ban, mute, or warning
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SanctionInput"
+      responses:
+        "201":
+          description: Sanction applied and confirmed by Telegram
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sanction"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "502":
+          description: Telegram rejected or did not confirm the operation
+  /sanctions/{sanctionId}/restore:
+    post:
+      operationId: restoreSanction
+      tags: [moderation]
+      summary: Restore a prior sanction, including saved member permissions
+      parameters:
+        - name: sanctionId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Sanction restored
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sanction"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "502":
+          description: Telegram rejected or did not confirm restoration
+  /groups/{groupId}/settings:
+    get:
+      operationId: getGroupSettings
+      tags: [settings]
+      summary: Get settings for a Telegram group
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Group settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupSettings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    patch:
+      operationId: updateGroupSettings
+      tags: [settings]
+      summary: Update group settings
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupSettingsUpdate"
+      responses:
+        "200":
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupSettings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /templates:
+    get:
+      operationId: listTemplates
+      tags: [content]
+      summary: List configured moderation and group-message templates
+      responses:
+        "200":
+          description: Message templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MessageTemplate"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /templates/{templateType}:
+    put:
+      operationId: updateTemplate
+      tags: [content]
+      summary: Save a template and Telegram image file identifier
+      parameters:
+        - name: templateType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [welcome, goodbye, ban, mute, warn, kick]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageTemplateInput"
+      responses:
+        "200":
+          description: Saved template
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageTemplate"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /bot/settings:
+    get:
+      operationId: getBotSettings
+      tags: [settings]
+      summary: Get Kaguya service settings
+      responses:
+        "200":
+          description: Bot settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BotSettings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    patch:
+      operationId: updateBotSettings
+      tags: [settings]
+      summary: Update Kaguya service settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BotSettingsUpdate"
+      responses:
+        "200":
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BotSettings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /phrases:
+    get:
+      operationId: listPhrases
+      tags: [content]
+      summary: Search the response library
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema: { type: string, maxLength: 80 }
+        - name: search
+          in: query
+          required: false
+          schema: { type: string, maxLength: 100 }
+      responses:
+        "200":
+          description: Matching phrases
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Phrase"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createPhrase
+      tags: [content]
+      summary: Add a phrase to the local response library
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhraseInput"
+      responses:
+        "201":
+          description: Phrase created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Phrase"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /gifs:
+    get:
+      operationId: listGifs
+      tags: [content]
+      summary: List registered Telegram GIF identifiers
+      responses:
+        "200":
+          description: GIFs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GifRecord"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createGif
+      tags: [content]
+      summary: Register an authentic Telegram file identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GifInput"
+      responses:
+        "201":
+          description: GIF registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GifRecord"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /reminders:
+    get:
+      operationId: listReminders
+      tags: [content]
+      summary: List persisted reminders
+      responses:
+        "200":
+          description: Reminders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reminder"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createReminder
+      tags: [content]
+      summary: Schedule a persistent Telegram reminder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReminderInput"
+      responses:
+        "201":
+          description: Reminder scheduled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reminder"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /activity:
+    get:
+      operationId: listActivity
+      tags: [activity]
+      summary: List recent administrative and bot activity
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 100, default: 25 }
+      responses:
+        "200":
+          description: Activity entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityEntry"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    BadRequest:
+      description: Invalid input or unsupported Telegram operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+  schemas:
+    HealthStatus:
+      type: object
+      additionalProperties: false
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ErrorResponse:
+      type: object
+      properties:
+        error: { type: string }
+      required: [error]
+    DashboardSummary:
+      type: object
+      properties:
+        groups: { type: integer }
+        membersSeen: { type: integer }
+        activeSanctions: { type: integer }
+        pendingReminders: { type: integer }
+        botStatus: { type: string, enum: [online, offline, needs_setup] }
+        recentActivity:
+          type: array
+          items: { $ref: "#/components/schemas/ActivityEntry" }
+      required: [groups, membersSeen, activeSanctions, pendingReminders, botStatus, recentActivity]
+    TelegramGroup:
+      type: object
+      properties:
+        chatId: { type: string }
+        title: { type: string }
+        memberCount: { type: integer }
+        enabled: { type: boolean }
+        lastSeenAt: { type: ["string", "null"], format: date-time }
+      required: [chatId, title, memberCount, enabled, lastSeenAt]
+    GroupMember:
+      type: object
+      properties:
+        userId: { type: string }
+        username: { type: ["string", "null"] }
+        fullName: { type: string }
+        status: { type: string, enum: [active, restricted, banned, unknown] }
+        lastSeenAt: { type: ["string", "null"], format: date-time }
+      required: [userId, username, fullName, status, lastSeenAt]
+    Sanction:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        groupId: { type: string }
+        userId: { type: string }
+        username: { type: ["string", "null"] }
+        action: { type: string, enum: [ban, mute, warn, kick] }
+        status: { type: string, enum: [active, expired, reversed, failed, applying, restoring] }
+        reason: { type: ["string", "null"] }
+        createdAt: { type: string, format: date-time }
+        expiresAt: { type: ["string", "null"], format: date-time }
+        permissionsSnapshot:
+          type: ["object", "null"]
+          additionalProperties: { type: boolean }
+      required: [id, groupId, userId, username, action, status, reason, createdAt, expiresAt, permissionsSnapshot]
+    SanctionInput:
+      type: object
+      properties:
+        userId: { type: string, minLength: 1, maxLength: 32 }
+        username: { type: ["string", "null"], maxLength: 128 }
+        action: { type: string, enum: [ban, mute, warn, kick] }
+        reason: { type: string, maxLength: 500 }
+        durationSeconds: { type: integer, minimum: 1, maximum: 31536000 }
+      required: [userId, action]
+    GroupSettings:
+      type: object
+      properties:
+        groupId: { type: string }
+        enabled: { type: boolean }
+        aiEnabled: { type: boolean }
+        moderationEnabled: { type: boolean }
+        antiFloodEnabled: { type: boolean }
+        welcomeText: { type: string }
+        goodbyeText: { type: string }
+      required: [groupId, enabled, aiEnabled, moderationEnabled, antiFloodEnabled, welcomeText, goodbyeText]
+    GroupSettingsUpdate:
+      type: object
+      properties:
+        enabled: { type: boolean }
+        aiEnabled: { type: boolean }
+        moderationEnabled: { type: boolean }
+        antiFloodEnabled: { type: boolean }
+        welcomeText: { type: string, maxLength: 2000 }
+        goodbyeText: { type: string, maxLength: 2000 }
+    MessageTemplate:
+      type: object
+      properties:
+        type: { type: string, enum: [welcome, goodbye, ban, mute, warn, kick] }
+        text: { type: string }
+        imageFileId: { type: ["string", "null"] }
+        updatedAt: { type: string, format: date-time }
+      required: [type, text, imageFileId, updatedAt]
+    MessageTemplateInput:
+      type: object
+      properties:
+        text: { type: string, maxLength: 2000 }
+        imageFileId: { type: ["string", "null"], maxLength: 512 }
+      required: [text, imageFileId]
+    BotSettings:
+      type: object
+      properties:
+        aiEnabled: { type: boolean }
+        personality: { type: string, maxLength: 12000 }
+        timezone: { type: string, maxLength: 100 }
+        groqConfigured: { type: boolean }
+        telegramConfigured: { type: boolean }
+      required: [aiEnabled, personality, timezone, groqConfigured, telegramConfigured]
+    BotSettingsUpdate:
+      type: object
+      properties:
+        aiEnabled: { type: boolean }
+        personality: { type: string, maxLength: 12000 }
+        timezone: { type: string, maxLength: 100 }
+    Phrase:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        category: { type: string, maxLength: 80 }
+        tone: { type: string, maxLength: 40 }
+        text: { type: string, maxLength: 2000 }
+        enabled: { type: boolean }
+      required: [id, category, tone, text, enabled]
+    PhraseInput:
+      type: object
+      properties:
+        category: { type: string, minLength: 1, maxLength: 80 }
+        tone: { type: string, maxLength: 40 }
+        text: { type: string, minLength: 1, maxLength: 2000 }
+      required: [category, text]
+    GifRecord:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        category: { type: string, maxLength: 80 }
+        fileId: { type: string, minLength: 1, maxLength: 512 }
+        usageCount: { type: integer }
+      required: [id, category, fileId, usageCount]
+    GifInput:
+      type: object
+      properties:
+        category: { type: string, minLength: 1, maxLength: 80 }
+        fileId: { type: string, minLength: 1, maxLength: 512 }
+      required: [category, fileId]
+    Reminder:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        chatId: { type: string }
+        text: { type: string, maxLength: 2000 }
+        dueAt: { type: string, format: date-time }
+        status: { type: string, enum: [pending, sending, sent, failed, cancelled] }
+      required: [id, chatId, text, dueAt, status]
+    ReminderInput:
+      type: object
+      properties:
+        chatId: { type: string, minLength: 1, maxLength: 32 }
+        text: { type: string, minLength: 1, maxLength: 2000 }
+        dueAt: { type: string, format: date-time }
+      required: [chatId, text, dueAt]
+    ActivityEntry:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        action: { type: string, maxLength: 100 }
+        summary: { type: string, maxLength: 500 }
+        actor: { type: ["string", "null"], maxLength: 128 }
+        groupId: { type: ["string", "null"], maxLength: 32 }
+        createdAt: { type: string, format: date-time }
+      required: [id, action, summary, actor, groupId, createdAt]
+

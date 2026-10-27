@@ -1,0 +1,29 @@
+{
+  "name": "@workspace/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts"
+  },
+  "scripts": {
+    "push": "drizzle-kit push --config ./drizzle.config.ts",
+    "push-force": "drizzle-kit push --force --config ./drizzle.config.ts",
+    "migrate:render": "node --env-file-if-exists=../../.env ./scripts/migrate-render.mjs",
+    "import:kiwbot-phrases": "node --env-file-if-exists=../../.env ./scripts/import-kiwbot-phrases.mjs",
+    "import:kaguya-phrases": "node --env-file-if-exists=../../.env ./scripts/import-kaguya-phrases.mjs",
+    "phrases:validate": "node --env-file-if-exists=../../.env ./scripts/validate-phrase-counts.mjs"
+  },
+  "dependencies": {
+    "drizzle-orm": "catalog:",
+    "drizzle-zod": "^0.8.3",
+    "pg": "^8.23.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/pg": "^8.23.1",
+    "drizzle-kit": "^0.31.11"
+  }
+}
