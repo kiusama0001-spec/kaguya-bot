@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.example.*
+*.pem
+*.key
+secrets/
+credentials/
+
+# Logs and runtime data
+*.log
+logs/
+tmp/
+temp/
+coverage/
+.nyc_output/
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build output (tracked build artifacts must be untracked separately)
+dist/
+build/
+.cache/
+.vite/
