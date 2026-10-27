@@ -1,0 +1,11 @@
+export const TYPE_ES: Readonly<Record<string, string>>;
+export function fetchPokemon(identifier: string | number): Promise<any>;
+export function fetchPokemonSpecies(identifier: string | number): Promise<any>;
+export function fetchEvolutionChain(identifier: string | number): Promise<{ species: string; stages: Array<{ name: string; depth: number; condition: string }>; url: string }>;
+export function fetchPokemonMoves(identifier: string | number, limit?: number): Promise<{ name: string; id: number; moves: Array<{ name: string; methods: Array<{ method: string; level: number; version: string }> }>; url: string }>;
+export function fetchItem(identifier: string | number): Promise<any>;
+export function fetchType(identifier: string | number): Promise<any>;
+export function pokemonTypeEffectiveness(identifier: string | number): Promise<{ name: string; types: string[]; four: string[]; double: string[]; half: string[]; quarter: string[]; immune: string[]; source: string }>;
+export function fetchTypeEffectiveness(identifier: string): Promise<{ name: string; url: string; offensive: { superEffective: string[]; notVeryEffective: string[]; noEffect: string[] }; defensive: { weaknesses: string[]; resistances: string[]; immunities: string[] } }>;
+export function recommendTeam(identifiers: string[]): Promise<{ team: Array<{ name: string; types: string[] }>; weaknessesToReview: string[]; suggestions: Array<{ name: string; types: string[]; baseStatTotal: number; helpsCover: string }>; source: string }>;
+export function clearPokemonCache(): void;
