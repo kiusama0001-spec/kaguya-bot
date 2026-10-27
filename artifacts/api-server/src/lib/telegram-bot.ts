@@ -16,6 +16,8 @@ type TelegramMessage = {
   voice?: { file_id: string; file_size?: number; mime_type?: string; duration?: number };
   audio?: { file_id: string; file_size?: number; mime_type?: string; file_name?: string; duration?: number };
   photo?: Array<{ file_id: string; file_size?: number; width?: number; height?: number }>;
+  animation?: { file_id: string; file_size?: number; mime_type?: string; file_name?: string; duration?: number };
+  document?: { file_id: string; file_size?: number; mime_type?: string; file_name?: string };
   reply_to_message?: { from?: TelegramUser };
   new_chat_members?: TelegramUser[];
   left_chat_member?: TelegramUser;
@@ -89,6 +91,52 @@ const floodWindow = new Map<string, number[]>();
 const externalRateWindow = new Map<string, number[]>();
 const externalRateNotices = new Map<string, number>();
 const pokemonCache = new Map<string, { at: number; text: string }>();
+
+type GifUploadSession = { category: string | null; savedCount: number };
+// Only the interactive upload state is process-local. Each accepted GIF is persisted
+// immediately in gifRecords, so completed uploads survive restarts and remain visible in the panel.
+const gifUploadSessions = new Map<string, GifUploadSession>();
+
+function gifUploadSessionKey(chatId: string, userId: string): string {
+  return `${chatId}:${userId}`;
+}
+
+function configuredTelegramIds(...names: string[]): Set<string> {
+  const ids = new Set<string>();
+  for (const name of names) {
+    for (const value of (process.env[name] ?? "").split(",")) {
+      const id = value.trim();
+      if (/^\d+$/.test(id)) ids.add(id);
+    }
+  }
+  return ids;
+}
+
+function canManageGifLibrary(userId: string): boolean {
+  // Kiu is configured as the verified creator identity in this bot. Additional
+  // trusted operators can be explicitly allowed without granting access to all users.
+  return configuredTelegramIds("KAGUYA_KIU_TELEGRAM_IDS", "KAGUYA_GIF_ADMIN_TELEGRAM_IDS").has(userId);
+}
+
+function validGifCategory(value: string): string | null {
+  const category = value.trim();
+  if (!category || category.length > 80 || /[\u0000-\u001f\u007f]/.test(category)) return null;
+  return category;
+}
+
+function gifFileIdFromMessage(message: TelegramMessage): string | null {
+  if (message.animation?.file_id) return message.animation.file_id;
+  const document = message.document;
+  if (!document?.file_id) return null;
+  const mimeType = (document.mime_type ?? "").toLowerCase();
+  const fileName = (document.file_name ?? "").toLowerCase();
+  // Telegram can deliver a GIF as an animation or as a document. Accept common
+  // GIF/MP4 animation formats; reject unrelated documents before saving them.
+  if (mimeType === "image/gif" || mimeType === "video/mp4" || /\.(gif|mp4)$/.test(fileName)) {
+    return document.file_id;
+  }
+  return null;
+}
 
 function fullName(user: TelegramUser): string {
   return [user.first_name, user.last_name].filter(Boolean).join(" ") || "Usuario";
@@ -697,11 +745,108 @@ async function wikiReply(chatId: string, userId: string, query: string): Promise
 
 async function gifReply(chatId: string, categoryInput: string): Promise<void> {
   const category = categoryInput.trim();
-  const rows = await db.select().from(gifRecords).where(category ? eq(gifRecords.category, category) : undefined).orderBy(desc(gifRecords.usageCount)).limit(100);
-  if (!rows.length) { await sendTelegramMessage(chatId, category ? `No hay GIFs registrados en «${category}».` : "La biblioteca de GIFs está vacía; añade GIFs con su file_id desde el panel."); return; }
-  const choice = rows[Math.floor(Math.random() * rows.length)];
+  // Choose randomly in the database, not from a capped or usage-sorted subset.
+  // This allows every saved GIF in the requested category to be selected.
+  const [choice] = await db.select().from(gifRecords)
+    .where(category ? eq(gifRecords.category, category) : undefined)
+    .orderBy(sql`random()`).limit(1);
+  if (!choice) {
+    await sendTelegramMessage(chatId, category
+      ? `No hay GIFs registrados en «${category}». Puedes añadirlos por privado con /gifadd.`
+      : "La biblioteca de GIFs está vacía; un administrador puede añadir GIFs por privado con /gifadd.");
+    return;
+  }
   await sendTelegramAnimation(chatId, choice.fileId);
-  await db.update(gifRecords).set({ usageCount: choice.usageCount + 1 }).where(eq(gifRecords.id, choice.id));
+  await db.update(gifRecords).set({ usageCount: sql`${gifRecords.usageCount} + 1` }).where(eq(gifRecords.id, choice.id));
+}
+
+async function beginGifUpload(chatId: string, userId: string, categoryInput: string): Promise<void> {
+  if (chatId !== userId) {
+    await sendTelegramMessage(chatId, "Por seguridad, la carga de GIF solo se puede iniciar en el chat privado con Kaguya.");
+    return;
+  }
+  if (!canManageGifLibrary(userId)) {
+    await sendTelegramMessage(chatId, "No tienes permiso para administrar la biblioteca de GIFs.");
+    return;
+  }
+
+  const category = categoryInput.trim() ? validGifCategory(categoryInput) : null;
+  if (categoryInput.trim() && !category) {
+    await sendTelegramMessage(chatId, "La categoría debe tener entre 1 y 80 caracteres y no puede contener caracteres de control. Intenta /gifadd de nuevo.");
+    return;
+  }
+
+  gifUploadSessions.set(gifUploadSessionKey(chatId, userId), { category, savedCount: 0 });
+  if (!category) {
+    await sendTelegramMessage(chatId, "📥 Carga de GIF iniciada. Escribe el nombre exacto de la categoría a la que quieres agregarlos (máximo 80 caracteres). Puedes usar una categoría existente o crear una nueva.\nSi cambiaste de opinión, usa /cancelar.");
+    return;
+  }
+  await sendTelegramMessage(chatId, `📥 Carga de GIF iniciada para la categoría «${category}». Envíame uno o varios GIF/animaciones consecutivamente. Cada uno se guardará en la base de datos. Cuando termines, usa /giffin; para cancelar, /cancelar.`);
+}
+
+async function finishGifUpload(chatId: string, userId: string): Promise<void> {
+  const key = gifUploadSessionKey(chatId, userId);
+  const session = gifUploadSessions.get(key);
+  if (!session) {
+    await sendTelegramMessage(chatId, "No tienes una carga de GIF activa. Inicia una con /gifadd.");
+    return;
+  }
+  if (!session.category) {
+    await sendTelegramMessage(chatId, "Primero escribe una categoría para continuar, o usa /cancelar para salir.");
+    return;
+  }
+  gifUploadSessions.delete(key);
+  await sendTelegramMessage(chatId, `✅ Carga finalizada para «${session.category}». GIF nuevos guardados: ${session.savedCount}. Puedes iniciar otra categoría con /gifadd.`);
+}
+
+async function cancelGifUpload(chatId: string, userId: string): Promise<void> {
+  const key = gifUploadSessionKey(chatId, userId);
+  const session = gifUploadSessions.get(key);
+  if (!session) {
+    await sendTelegramMessage(chatId, "No tienes una carga de GIF activa para cancelar.");
+    return;
+  }
+  gifUploadSessions.delete(key);
+  await sendTelegramMessage(chatId, `Carga cancelada${session.category ? ` para «${session.category}»` : ""}. Los ${session.savedCount} GIF que ya se guardaron se conservan en la biblioteca.`);
+}
+
+async function handleGifUploadMedia(message: TelegramMessage, chatId: string, userId: string): Promise<boolean> {
+  if (message.chat.type !== "private") return false;
+  const key = gifUploadSessionKey(chatId, userId);
+  const session = gifUploadSessions.get(key);
+  if (!session) return false;
+
+  if (!canManageGifLibrary(userId)) {
+    gifUploadSessions.delete(key);
+    await sendTelegramMessage(chatId, "La sesión de carga se cerró porque tu cuenta no tiene permiso para administrar GIFs.");
+    return true;
+  }
+  if (!session.category) {
+    await sendTelegramMessage(chatId, "Primero escribe el nombre de la categoría. Todavía no he guardado este archivo.");
+    return true;
+  }
+
+  const fileId = gifFileIdFromMessage(message);
+  if (!fileId) {
+    await sendTelegramMessage(chatId, "No reconocí este archivo como un GIF o una animación compatible. Envíalo como GIF/animación o como documento .gif/.mp4; no se guardó nada. Usa /giffin para terminar o /cancelar para cancelar.");
+    return true;
+  }
+
+  try {
+    const [created] = await db.insert(gifRecords).values({ category: session.category, fileId })
+      .onConflictDoNothing({ target: [gifRecords.category, gifRecords.fileId] })
+      .returning({ id: gifRecords.id });
+    if (!created) {
+      await sendTelegramMessage(chatId, `ℹ️ Este GIF ya estaba registrado en «${session.category}». No se creó un duplicado. Puedes enviar otro GIF o usar /giffin.`);
+      return true;
+    }
+    session.savedCount += 1;
+    await sendTelegramMessage(chatId, `✅ GIF guardado en «${session.category}». Total nuevo de esta carga: ${session.savedCount}. Puedes enviar otro o usar /giffin para terminar.`);
+  } catch (error) {
+    logger.error({ error: error instanceof Error ? error.message : "unknown", userId, category: session.category }, "Could not persist Telegram GIF upload");
+    await sendTelegramMessage(chatId, "❌ No pude guardar este GIF en la base de datos. No lo doy por registrado; puedes volver a enviarlo o usar /giffin para terminar.");
+  }
+  return true;
 }
 
 async function eventsReply(chatId: string): Promise<void> {
@@ -836,6 +981,7 @@ async function handleMessage(message: TelegramMessage): Promise<void> {
   const { group } = isGroup(message.chat) ? await getGroupConfig(chatId) : { group: undefined };
   if (group?.enabled === false) return;
   if (!text) {
+    if (await handleGifUploadMedia(message, chatId, userId)) return;
     await handleMediaMessage(message, chatId, userId);
     return;
   }
@@ -845,9 +991,45 @@ async function handleMessage(message: TelegramMessage): Promise<void> {
   const argument = commandMatch?.[3] ?? "";
 
   if (command && !targetedBot) return;
+  if (command === "gifadd" || command === "gifcargar") { await beginGifUpload(chatId, userId, argument); return; }
+  if (command === "giffin" || command === "gifterminar") {
+    if (chatId !== userId || !canManageGifLibrary(userId)) {
+      await sendTelegramMessage(chatId, "La carga de GIF solo se puede administrar por privado y con una cuenta autorizada.");
+      return;
+    }
+    await finishGifUpload(chatId, userId);
+    return;
+  }
+  if (command === "cancelar" || command === "gifcancelar") {
+    await cancelGifUpload(chatId, userId);
+    return;
+  }
+
+  const uploadKey = gifUploadSessionKey(chatId, userId);
+  const uploadSession = message.chat.type === "private" ? gifUploadSessions.get(uploadKey) : undefined;
+  if (uploadSession && canManageGifLibrary(userId) && !command) {
+    if (!uploadSession.category) {
+      const category = validGifCategory(text);
+      if (!category) {
+        await sendTelegramMessage(chatId, "La categoría debe tener entre 1 y 80 caracteres y no puede estar vacía. Escribe una categoría válida o usa /cancelar.");
+        return;
+      }
+      uploadSession.category = category;
+      await sendTelegramMessage(chatId, `Categoría seleccionada: «${category}». Ahora envíame varios GIF/animaciones. Cada uno se guardará de inmediato. Usa /giffin al terminar o /cancelar para cancelar la carga sin borrar lo ya guardado.`);
+      return;
+    }
+    await sendTelegramMessage(chatId, `La categoría activa es «${uploadSession.category}». Envíame un GIF/animación, usa /giffin para terminar o /cancelar para cancelar.`);
+    return;
+  }
+
   if (command === "start") { await sendTelegramMessage(chatId, await pickPhrase(userId, "eventos_bienvenidas_despedidas_concursos", "Hola. Soy Kaguya. Usa /help para ver lo que está disponible.", false)); return; }
   if (command === "help" || command === "commands") {
-    await sendTelegramMessage(chatId, await pickPhrase(userId, "ayuda_errores_comandos", "Comandos: /start, /help, /ping, /status, /id, /ask pregunta, /memory on|off|forget, /tts texto, /pokemon nombre, /evoluciones nombre, /movimientos nombre, /objeto nombre, /tipo tipo, /debilidades nombre, /equipo nombres, /wiki búsqueda, /gif [categoría], /remind minutos texto, /eventos, /evento ID, /participar ID, /bdsm tema y /tts texto. En privado puedes enviar fotos/notas de voz; en grupos menciona o responde a Kaguya. La moderación administrativa se gestiona desde el panel.", false)); return;
+    const helpText = await pickPhrase(userId, "ayuda_errores_comandos", "Comandos: /start, /help, /ping, /status, /id, /ask pregunta, /memory on|off|forget, /tts texto, /pokemon nombre, /evoluciones nombre, /movimientos nombre, /objeto nombre, /tipo tipo, /debilidades nombre, /equipo nombres, /wiki búsqueda, /gif [categoría], /remind minutos texto, /eventos, /evento ID, /participar ID, /bdsm tema. En privado puedes enviar fotos/notas de voz; en grupos menciona o responde a Kaguya. La moderación administrativa se gestiona desde el panel.", false);
+    const gifAdminHelp = message.chat.type === "private" && canManageGifLibrary(userId)
+      ? "\n\nAdministración de GIF: /gifadd inicia una carga; escribe una categoría y envía varios GIF/animaciones. /giffin termina la carga y /cancelar la cancela sin borrar los GIF ya guardados."
+      : "";
+    await sendTelegramMessage(chatId, `${helpText}${gifAdminHelp}`);
+    return;
   }
   if (command === "ping") { await sendTelegramMessage(chatId, await pickPhrase(userId, "personalidad_conversacion_general", "Pong. El manejador de mensajes está respondiendo.", false)); return; }
   if (command === "id") { await sendTelegramMessage(chatId, `Tu ID: ${userId}\nChat: ${chatId}`); return; }
