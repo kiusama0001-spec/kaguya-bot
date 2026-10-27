@@ -1,0 +1,1 @@
+{"version":3,"file":"groupSettings.d.ts","sourceRoot":"","sources":["../../../src/generated/types/groupSettings.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,MAAM,WAAW,aAAa;IAC5B,OAAO,EAAE,MAAM,CAAC;IAChB,OAAO,EAAE,OAAO,CAAC;IACjB,SAAS,EAAE,OAAO,CAAC;IACnB,iBAAiB,EAAE,OAAO,CAAC;IAC3B,gBAAgB,EAAE,OAAO,CAAC;IAC1B,WAAW,EAAE,MAAM,CAAC;IACpB,WAAW,EAAE,MAAM,CAAC;CACrB"}

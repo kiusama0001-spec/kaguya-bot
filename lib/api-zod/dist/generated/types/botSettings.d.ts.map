@@ -1,0 +1,1 @@
+{"version":3,"file":"botSettings.d.ts","sourceRoot":"","sources":["../../../src/generated/types/botSettings.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,MAAM,WAAW,WAAW;IAC1B,SAAS,EAAE,OAAO,CAAC;IACnB,uBAAuB;IACvB,WAAW,EAAE,MAAM,CAAC;IACpB,qBAAqB;IACrB,QAAQ,EAAE,MAAM,CAAC;IACjB,cAAc,EAAE,OAAO,CAAC;IACxB,kBAAkB,EAAE,OAAO,CAAC;CAC7B"}

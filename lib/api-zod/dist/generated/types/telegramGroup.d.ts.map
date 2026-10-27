@@ -1,0 +1,1 @@
+{"version":3,"file":"telegramGroup.d.ts","sourceRoot":"","sources":["../../../src/generated/types/telegramGroup.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,MAAM,WAAW,aAAa;IAC5B,MAAM,EAAE,MAAM,CAAC;IACf,KAAK,EAAE,MAAM,CAAC;IACd,WAAW,EAAE,MAAM,CAAC;IACpB,OAAO,EAAE,OAAO,CAAC;IACjB,gBAAgB;IAChB,UAAU,EAAE,IAAI,GAAG,IAAI,CAAC;CACzB"}
