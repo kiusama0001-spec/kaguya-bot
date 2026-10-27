@@ -1,0 +1,114 @@
+## 7. OBLIGATORIO: ENTREGA FINAL PREPARADA PARA RENDER
+
+El destino definitivo de KAGUYA es **Render**. No quiero un proyecto que solamente funcione en el entorno de Replit: debe quedar configurado para instalarse, compilarse, arrancar y mantenerse en Render.
+
+### A. Conserva la arquitectura y corrige el punto de entrada
+
+El proyecto existente utiliza Node.js, TypeScript, Express, React, Vite, pnpm y PostgreSQL.
+
+- Inspecciona el `package.json` raíz y los manifiestos de cada workspace.
+- Identifica el punto de entrada real del servidor.
+- Conserva `artifacts/api-server/src/index.ts` como entrada fuente si sigue siendo el punto de inicio correcto.
+- Verifica que el proceso de producción ejecute el archivo compilado correcto, que en la auditoría aparece como `dist/index.mjs`.
+- Corrige los scripts `build` y `start` para que funcionen desde la raíz del monorepo y en Render.
+- Configura expresamente la versión compatible de Node.js y pnpm.
+- No crees un `main.py` ni migres el proyecto a Python: no corresponde a la arquitectura existente.
+- Si se necesita un campo `main` en algún manifiesto, configúralo según las necesidades reales del paquete; no lo uses como sustituto de un comando de arranque correcto.
+
+### B. Panel web y bot funcionando juntos
+
+Configura un servicio web de Render que sirva el panel React y la API Express, y que inicie también el bot de Telegram y sus trabajadores persistentes.
+
+El proceso debe iniciar correctamente:
+- Servidor web.
+- Bot de Telegram y su polling.
+- Conexión a PostgreSQL.
+- Trabajadores de recordatorios y sanciones temporales.
+- Tareas de recuperación tras reinicios.
+
+Evita que el mismo token inicie dos pollers simultáneos. Asegura que el servidor escuche en `0.0.0.0` utilizando el puerto `PORT` asignado por Render.
+
+El estado de salud debe reflejar los componentes reales. Si el bot está desconectado, no debe aparecer como conectado simplemente porque exista un token.
+
+### C. Configuración de Render
+
+Revisa y completa `render.yaml`. No te limites a comprobar que el archivo existe.
+
+Debe definir correctamente:
+- Un servicio web para Kaguya.
+- PostgreSQL persistente.
+- Región compatible para el servicio y la base de datos.
+- Versión de Node.js.
+- Instalación congelada de pnpm.
+- Comando de compilación de producción.
+- Comando de inicio de producción.
+- Migraciones seguras de base de datos.
+- Health check real.
+- Variables de entorno y secretos necesarios.
+
+Usa los comandos que correspondan al monorepo existente. No inventes rutas ni comandos sin verificarlos.
+
+### D. Instalación y comandos de producción
+
+Resuelve el problema previo de descarga de pnpm cuando dispongas de una conexión funcional. Respeta `pnpm-lock.yaml` y las versiones declaradas.
+
+Verifica que los comandos equivalentes a estos funcionen desde la raíz del repositorio:
+
+```bash
+corepack enable
+corepack prepare pnpm@10.8.1 --activate
+pnpm install --frozen-lockfile
+pnpm build
+pnpm test
+pnpm start
+```
+
+Ajusta los comandos únicamente si los manifiestos reales del proyecto requieren otra sintaxis y documenta la corrección.
+
+El comando de inicio debe arrancar el servidor compilado, iniciar el bot de Telegram y mantener funcionando sus tareas persistentes. No puede limitarse a levantar Express sin el bot.
+
+Ejecuta el typecheck semántico completo y la compilación de todos los paquetes. El análisis sintáctico aislado no sustituye estas pruebas.
+
+### E. Base de datos y persistencia
+
+Utiliza PostgreSQL de Render para almacenar de forma persistente los datos de Kaguya.
+
+Configura correctamente `DATABASE_URL`, las migraciones, las conexiones y el cierre ordenado. Evita depender del disco temporal de Render para guardar recordatorios, frases, GIFs registrados, configuraciones, memoria o sanciones.
+
+Las migraciones deben ejecutarse en un momento seguro del despliegue y nunca eliminar datos existentes por accidente.
+
+### F. Variables de entorno y secretos
+
+Documenta las variables que deben configurarse en Render, como mínimo:
+
+- `DATABASE_URL`
+- `TELEGRAM_BOT_TOKEN`
+- `CLERK_SECRET_KEY`
+- `CLERK_PUBLISHABLE_KEY`
+- `VITE_CLERK_PUBLISHABLE_KEY`
+- `KAGUYA_ADMIN_EMAILS` o `KAGUYA_ADMIN_CLERK_USER_IDS`
+- `GROQ_API_KEY`
+- `GROQ_MODEL`
+- `KAGUYA_KIU_TELEGRAM_IDS`
+- `KAGUYA_KALU_TELEGRAM_IDS`
+
+Incluye las variables adicionales necesarias para ElevenLabs y demás integraciones que realmente estén implementadas.
+
+No incluyas claves reales en el repositorio. Comprueba cuáles son obligatorias, cuáles son opcionales y cuáles deben configurarse durante la compilación.
+
+### G. Comprobación final de Render
+
+Antes de dar por terminada la entrega:
+
+1. Ejecuta la instalación congelada.
+2. Ejecuta el typecheck completo.
+3. Ejecuta las pruebas.
+4. Compila el proyecto para producción.
+5. Verifica las migraciones y `render.yaml`.
+6. Prueba el arranque del servidor y del bot.
+7. Revisa el health check y la recuperación de tareas.
+8. Prepara instrucciones exactas para desplegar el proyecto en Render.
+
+Si dispones de acceso a Render y a las credenciales necesarias, realiza un despliegue real y revisa los logs. En caso contrario, no inventes un despliegue exitoso: entrega el proyecto preparado y especifica qué comprobación externa queda pendiente.
+
+**Entrega final obligatoria:** ZIP completo, punto de entrada verificado, scripts de producción funcionales, configuración de Render correcta, variables de entorno documentadas, pruebas y resultados honestos.

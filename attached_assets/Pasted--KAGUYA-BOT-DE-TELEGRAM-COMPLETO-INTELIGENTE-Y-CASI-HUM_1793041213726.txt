@@ -1,0 +1,405 @@
+# KAGUYA — BOT DE TELEGRAM COMPLETO, INTELIGENTE Y CASI HUMANO
+
+Quiero que construyas y entregues el proyecto completo de mi bot de Telegram llamado **KAGUYA**. No quiero un plan por etapas, un prototipo, una demostración ni una estructura vacía. Quiero que implementes todos los módulos solicitados, los integres entre sí, ejecutes las pruebas y dejes el proyecto listo para configurar y poner en funcionamiento.
+
+**No te limites a cumplir literalmente esta lista: si descubres funciones especiales, mejoras, herramientas o características que realmente puedan hacer a Kaguya más inteligente, útil, natural, segura y completa, agrégalas.** Investiga las posibilidades técnicas, revisa las funciones disponibles de Telegram y elige las mejoras que aporten valor real. Documenta cualquier función adicional.
+
+No inventes integraciones, resultados, credenciales ni capacidades. Si algo requiere una clave externa, déjalo preparado para configurarla y explica cómo activarlo.
+
+## 1. PERSONALIDAD: KAGUYA DEBE PARECER CASI HUMANA
+
+Kaguya no debe sentirse como un bot que responde con frases genéricas. Debe tener una personalidad consistente y una conversación natural.
+
+Su personalidad será inteligente, orgullosa, elegante, sarcástica, juguetona, traviesa, observadora y ocasionalmente cariñosa. Debe poder bromear, picar a alguien, responder con ironía, mostrar curiosidad, ser cálida, ponerse seria y adaptarse a la conversación.
+
+Quiero que pueda:
+
+- Mantener conversaciones naturales, con respuestas coherentes con lo que acaba de decir el usuario.
+- Recordar el contexto relevante de una conversación y recuperar datos importantes cuando corresponda.
+- Diferenciar entre bromas, preguntas serias, discusiones, órdenes, confidencias y conversaciones delicadas.
+- Adaptar el tono a cada usuario sin perder su propia personalidad.
+- Recordar preferencias, apodos y datos que el usuario haya autorizado guardar.
+- Evitar repetir saludos, chistes, apodos, despedidas y respuestas recientes.
+- Hacer preguntas de seguimiento naturales cuando falte información.
+- Entender errores ortográficos comunes, abreviaciones, expresiones coloquiales y español mexicano.
+- Utilizar humor, sarcasmo, picardía y emojis con moderación, según la situación.
+- Tener estados conversacionales y diferentes matices de personalidad sin fingir emociones reales como si tuviera conciencia.
+- Reconocer cuándo no sabe algo, cuándo necesita buscar información y cuándo debe admitir un error.
+- No responder siempre con listas ni hablar como un manual.
+- No convertir cada mensaje en una respuesta de IA formal.
+- No interrumpir innecesariamente los chats con mensajes espontáneos.
+- No inventar recuerdos ni afirmar que recuerda algo que no está almacenado.
+
+Implementa memoria conversacional persistente por usuario y chat, resúmenes de conversaciones, preferencias configurables, límites de contexto y controles para consultar y eliminar recuerdos.
+
+La personalidad debe funcionar incluso si la IA externa está desactivada, mediante el sistema de frases locales.
+
+## 2. TRATO ESPECIAL PARA KIU Y KALU
+
+Los identificadores de Telegram deben configurarse mediante variables de entorno. No dependas exclusivamente de usernames, porque pueden cambiar.
+
+### Kiu — 1,500 frases especiales
+
+Kiu es el creador del bot. Kaguya debe tratarlo con especial confianza, complicidad, cariño, bromas, sarcasmo juguetón, reconocimiento y atención personalizada. Puede utilizar «amo Kiu» cuando resulte natural, sin repetirlo constantemente.
+
+### Kalu — 200 frases especiales
+
+Kalu debe recibir un trato cálido, respetuoso, amable y considerado, con un repertorio propio de respuestas.
+
+No confundas las identidades, no mezcles sus colecciones y no permitas que otro usuario obtenga sus respuestas privadas simplemente cambiando su nombre visible.
+
+Los identificadores deben ser configurables y verificarse de forma segura.
+
+## 3. SISTEMA DE 10,000 FRASES ORIGINALES
+
+El proyecto debe incorporar exactamente estas cantidades objetivo:
+
+| Categoría | Frases |
+|---|---:|
+| Personalidad y conversación general | 1,200 |
+| Especiales para Kiu | 1,500 |
+| Especiales para Kalu | 200 |
+| Moderación y administración | 1,200 |
+| Pokémon y Pokédex | 1,000 |
+| GIFs, bromas, acciones y reacciones | 1,200 |
+| Recordatorios, clientes, rentas y pagos | 600 |
+| BDSM educativo y conversaciones | 800 |
+| Eventos, bienvenidas, despedidas y concursos | 800 |
+| Ayuda, errores y comandos | 600 |
+| IA, estados de ánimo y respuestas contextuales | 900 |
+| **TOTAL** | **10,000** |
+
+Las frases deben ser variadas, originales y realmente útiles. No rellenes cantidades cambiando únicamente nombres, signos de puntuación o emojis.
+
+Implementa:
+- Clasificación por categoría, intención, contexto y tono.
+- Selección contextual de respuestas.
+- Control de repeticiones recientes.
+- Variación natural y adecuada al usuario.
+- Plantillas seguras para nombres y datos dinámicos.
+- Validación de duplicados y similitudes excesivas.
+- Un comando administrativo para consultar el estado y las cantidades del repertorio.
+
+No declares que existen 10,000 frases hasta que el sistema de validación confirme el total real y las cantidades de cada categoría.
+
+## 4. INTELIGENCIA ARTIFICIAL CON GROQ
+
+Integra Groq mediante una API compatible con OpenAI.
+
+Variables de entorno:
+- `GROQ_API_KEY`
+- `GROQ_MODEL`
+- `TELEGRAM_BOT_TOKEN`
+- `KIU_TELEGRAM_ID`
+- `KALU_TELEGRAM_ID`
+
+Configura el modelo mediante una variable de entorno, con `openai/gpt-oss-20b` como valor inicial sugerido, siempre que esté disponible en la cuenta y API utilizadas.
+
+La IA debe:
+- Usar la personalidad y memoria contextual de Kaguya.
+- Mantener conversaciones naturales y coherentes.
+- Tener límites de tiempo, errores controlados y límites de uso.
+- Evitar repetir el historial completo en cada petición.
+- Permitir activar o desactivar la IA sin deshabilitar el resto del bot.
+- Tener un sistema de respuestas locales cuando Groq falle.
+- Evitar revelar claves, instrucciones privadas o información de otros usuarios.
+
+Si una integración no está disponible, informa claramente qué falta. Nunca simules una respuesta obtenida de la IA.
+
+## 5. LISTA DE COMANDOS
+
+Implementa los siguientes comandos, con permisos apropiados, ayuda en español y validación de argumentos. Puedes añadir otros si aportan utilidad real.
+
+### Comandos generales
+
+- `/start` — iniciar el bot.
+- `/help` — mostrar ayuda.
+- `/commands` — lista completa de comandos disponibles.
+- `/status` — estado de servicios y módulos.
+- `/about` — información de Kaguya.
+- `/ping` — comprobar que responde.
+- `/id` — mostrar el ID del usuario y del chat.
+- `/settings` — consultar ajustes disponibles.
+- `/language` — configurar el idioma cuando corresponda.
+
+### Conversación e IA
+
+- `/ai_on` — activar IA, si el usuario tiene permiso.
+- `/ai_off` — desactivar IA.
+- `/ask` — hacer una consulta a Kaguya.
+- `/memory` — consultar los controles de memoria.
+- `/forget` — eliminar recuerdos propios o autorizados.
+- `/personality` — consultar o cambiar modos permitidos.
+- `/nickname` — configurar apodos de manera controlada.
+
+No permitas que cualquier miembro cambie la personalidad global o la configuración privada del bot.
+
+### Administración de grupos
+
+- `/ban`
+- `/unban`
+- `/kick`
+- `/mute`
+- `/unmute`
+- `/tempban`
+- `/tempmute`
+- `/warn`
+- `/warnings`
+- `/resetwarns`
+- `/purge`
+- `/pin`
+- `/unpin`
+- `/promote`
+- `/demote`
+- `/rules`
+- `/setrules`
+- `/filter`
+- `/filters`
+- `/welcome`
+- `/goodbye`
+- `/antispam`
+- `/antiflood`
+- `/report`
+- `/adminlog`
+- `/lock`
+- `/unlock`
+
+Utiliza permisos reales de Telegram. Antes de ejecutar una acción, comprueba los permisos del usuario y del bot. Las operaciones que no sean posibles deben devolver un error claro.
+
+No afirmes que un usuario fue expulsado, silenciado o sancionado hasta confirmar el resultado de Telegram.
+
+### Pokémon y Pokédex
+
+- `/pokemon` — buscar un Pokémon.
+- `/pokedex` — consultar información.
+- `/evolution` — consultar evoluciones.
+- `/moves` — consultar movimientos.
+- `/abilities` — consultar habilidades.
+- `/types` — consultar tipos.
+- `/weakness` — consultar debilidades y resistencias.
+- `/team` — analizar un equipo.
+- `/item` — consultar objetos.
+
+Integra PokéAPI o una alternativa fiable, con caché, manejo de errores y resultados reales.
+
+### GIFs y reacciones
+
+- `/addgif` — registrar un GIF.
+- `/delgif` — eliminar un GIF registrado.
+- `/listgifs` — listar GIFs.
+- `/gif` — seleccionar un GIF.
+- `/gifrandom` — elegir uno aleatoriamente.
+- `/gifcategory` — consultar categorías.
+- `/gifstats` — consultar estadísticas de uso.
+
+Permite registrar varios GIFs por categoría y escoger aleatoriamente entre ellos. Los identificadores deben proceder de archivos reales de Telegram.
+
+### Recordatorios, clientes y pagos
+
+- `/remind` — crear un recordatorio.
+- `/reminders` — listar recordatorios.
+- `/cancelreminder` — cancelar un recordatorio.
+- `/clientadd` — registrar un cliente.
+- `/clients` — consultar clientes autorizados.
+- `/client` — consultar un registro.
+- `/rentadd` — registrar una renta.
+- `/paymentadd` — registrar un pago.
+- `/balance` — consultar un saldo.
+- `/due` — consultar vencimientos.
+- `/paymenthistory` — consultar historial de pagos.
+
+Protege los datos financieros y limita su acceso al propietario o a usuarios autorizados. Utiliza importes, fechas y estados persistentes.
+
+### BDSM educativo
+
+- `/bdsm` — información general.
+- `/consent` — consentimiento y negociación.
+- `/limits` — límites y acuerdos.
+- `/safeword` — palabras y señales de seguridad.
+- `/aftercare` — cuidados posteriores.
+- `/protocols` — protocolos y roles.
+- `/bdsmfaq` — preguntas frecuentes.
+
+Las respuestas deben ser educativas, respetuosas y centradas en el consentimiento, los límites y la seguridad.
+
+### Eventos y participación
+
+- `/event` — consultar eventos.
+- `/eventcreate` — crear un evento.
+- `/eventclose` — cerrar un evento.
+- `/contest` — gestionar concursos.
+- `/participants` — consultar participantes.
+- `/welcome_test` — probar una bienvenida.
+- `/goodbye_test` — probar una despedida.
+
+Crea funciones útiles para concursos, participación, cierres y resultados, sin inventar votos ni interacciones que Telegram no permita.
+
+### Voz y utilidades
+
+- `/tts` — convertir texto en voz, si hay un servicio configurado.
+- `/transcribe` — transcribir audio mediante una integración real.
+- `/analyzeimage` — analizar imágenes si hay un modelo visual disponible.
+- `/health` — comprobar dependencias.
+- `/backup` — crear una copia de seguridad, con autorización.
+- `/export` — exportar datos permitidos.
+- `/import` — importar datos validados, con autorización.
+- `/privacy` — consultar políticas de datos.
+- `/cancel` — cancelar una operación o flujo interactivo en curso.
+
+Los comandos que no sean necesarios en un chat privado no deben aparecer como si fueran utilizables en cualquier grupo. La ayuda debe adaptarse a los permisos, módulos habilitados y tipo de chat.
+
+## 6. MODERACIÓN COMPLETA
+
+Implementa un sistema de moderación persistente con:
+- Configuración independiente por grupo.
+- Advertencias acumulables y sanciones configurables.
+- Protección contra spam, flood y mensajes repetidos.
+- Filtros de palabras y enlaces configurables.
+- Bienvenidas y despedidas personalizadas.
+- Registro de acciones administrativas.
+- Excepciones por usuarios o roles autorizados.
+- Protección frente a errores y sanciones duplicadas.
+- Mensajes de confirmación que distingan entre éxito y fallo.
+
+Documenta las limitaciones de Telegram para borrar mensajes, gestionar miembros, fijar contenido y administrar permisos.
+
+## 7. GIFS Y DESPEDIDAS PERSONALIZADAS
+
+Kaguya debe permitir registrar muchos GIFs y elegir uno al azar entre los disponibles.
+
+Para mensajes con variables de usuario utiliza:
+- `{sender_username}` para quien realiza la acción.
+- `{receptor_username}` para quien la recibe.
+
+Si no existe username, utiliza un nombre visible escapado correctamente.
+
+Permite asociar GIFs y frases a situaciones específicas, sin enviar siempre el mismo resultado.
+
+## 8. RECORDATORIOS Y TAREAS PROGRAMADAS
+
+Los recordatorios deben sobrevivir a los reinicios.
+
+Incluye:
+- Zona horaria configurable.
+- Fechas y horas validadas.
+- Control de tareas duplicadas.
+- Registro del estado de entrega.
+- Recuperación de recordatorios pendientes después de una caída.
+- Prevención de notificaciones repetidas.
+- Avisos configurables.
+- Gestión correcta de recordatorios vencidos.
+
+Si Telegram no permite enviar un mensaje o la entrega falla, conserva un estado que permita identificar el problema.
+
+## 9. FUNCIONES EXTRA: AÑADE LO QUE REALMENTE MEJORE A KAGUYA
+
+No te limites a los módulos anteriores. Examina qué características adicionales pueden hacer que Kaguya sea más útil y natural, e implementa las que sean compatibles con el proyecto y aporten valor real.
+
+Evalúa especialmente:
+- Panel administrativo mediante comandos o botones inline.
+- Menús interactivos con botones.
+- Configuración individual por grupo.
+- Sistema de plugins o módulos extensibles.
+- Estadísticas de actividad y errores.
+- Detección de errores frecuentes y recuperación automática.
+- Copias de seguridad y restauración verificable.
+- Exportación e importación seguras.
+- Caché de consultas externas.
+- Búsqueda contextual de información.
+- Perfiles y preferencias por usuario.
+- Sistema de permisos configurable.
+- Registro y auditoría de acciones sensibles.
+- Encuestas o concursos que aprovechen las capacidades reales de Telegram.
+- Respuestas a mensajes citados y contexto de conversación.
+- Detección de cuándo conviene contestar y cuándo es mejor guardar silencio.
+- Protección contra instrucciones maliciosas que intenten extraer secretos o datos privados.
+
+Puedes incorporar otras funciones útiles que descubras. No añadas complejidad solo por añadirla: cada característica debe tener un propósito claro, funcionar realmente y estar documentada.
+
+## 10. VOZ, AUDIO E IMÁGENES
+
+Prepara integraciones reales para:
+- Texto a voz en español de México, preferentemente con una voz configurable como `es-MX-DaliaNeural`.
+- Transcripción de notas de voz.
+- Análisis de imágenes mediante un modelo visual.
+- Interpretación de encuestas y resultados realmente accesibles al bot.
+
+No simules capacidades. Si hace falta instalar una dependencia, obtener una clave o habilitar un servicio, indícalo y proporciona los pasos de configuración.
+
+## 11. BASE DE DATOS, SEGURIDAD Y PRIVACIDAD
+
+Utiliza SQLite de forma segura para el almacenamiento persistente. Puedes incorporar PostgreSQL si mejora el despliegue y queda correctamente configurado.
+
+Guarda los datos necesarios para:
+- Usuarios y preferencias.
+- Memoria autorizada.
+- Configuración de grupos.
+- Frases y categorías.
+- GIFs.
+- Advertencias y sanciones.
+- Recordatorios y tareas.
+- Clientes, rentas y pagos.
+- Eventos y registros.
+- Estado de los módulos.
+
+Incluye inicialización automática, consultas parametrizadas, manejo de errores, migraciones, validación de datos, protección de secretos y controles de acceso.
+
+No registres tokens, contraseñas ni claves en logs. No expongas información privada en grupos. Implementa eliminación de datos personales cuando corresponda.
+
+## 12. ARCHIVOS Y DESPLIEGUE
+
+Entrega el proyecto completo, organizado y ejecutable, incluyendo como mínimo:
+
+- `main.py`
+- Módulos independientes para las funciones.
+- `requirements.txt`
+- `.env.example`
+- `.gitignore`
+- `README.md` en español.
+- Esquema o inicialización de base de datos.
+- Archivos de datos del repertorio.
+- Pruebas automatizadas.
+- Configuración de despliegue compatible con Replit.
+- Instrucciones para configurar Secrets y arrancar el bot.
+
+No incluyas credenciales reales ni subas archivos `.env` con secretos.
+
+## 13. PRUEBAS Y VERIFICACIÓN OBLIGATORIAS
+
+Antes de dar el proyecto por terminado:
+- Instala o verifica las dependencias.
+- Ejecuta las pruebas automatizadas.
+- Prueba los módulos y sus interacciones.
+- Comprueba la inicialización de la base de datos.
+- Comprueba el manejo de errores.
+- Valida los permisos de administración.
+- Verifica que los recordatorios persistan tras reiniciar.
+- Comprueba los comandos y argumentos.
+- Valida las cantidades y duplicados de las 10,000 frases.
+- Comprueba la separación entre las colecciones de Kiu y Kalu.
+- Comprueba el comportamiento cuando Groq o las API externas fallan.
+- Revisa los posibles errores de concurrencia y tareas duplicadas.
+- Corrige los errores detectados y vuelve a ejecutar las pruebas.
+
+Incluye al menos **70 pruebas automatizadas reales**, con resultados documentados.
+
+Las pruebas unitarias pueden usar mocks, pero identifica por separado las integraciones que requieren credenciales o un bot real para comprobarse. No confundas una prueba simulada con una prueba real de Telegram.
+
+## 14. ENTREGA FINAL
+
+Quiero que trabajes sobre el proyecto y construyas la solución completa, no que te limites a explicarme cómo hacerla.
+
+Al finalizar, proporciona:
+1. El proyecto completo con todos sus archivos.
+2. Una lista de los comandos implementados y sus permisos.
+3. Una lista de funciones adicionales que hayas incorporado y por qué son útiles.
+4. Las cantidades verificadas de frases por categoría.
+5. Los resultados reales de las pruebas.
+6. Las variables que debo configurar en Replit Secrets.
+7. Las instrucciones exactas para arrancar y probar el bot.
+8. Las funciones que requieren servicios externos o permisos especiales.
+9. Cualquier limitación que siga pendiente.
+
+No digas que el bot está completamente terminado si faltan módulos solicitados o si hay funciones que solo están simuladas. Prioriza completar las funciones reales y señala con honestidad cualquier bloqueo externo.
+
+**OBJETIVO FINAL:** quiero una KAGUYA completa, inteligente, personalizable, segura, con memoria contextual y una personalidad casi humana; con 10,000 frases reales, trato especial para Kiu y Kalu, administración de grupos, Pokédex, GIFs, BDSM educativo, recordatorios, clientes, pagos, voz y todas las mejoras útiles que puedas integrar. No quiero que me devuelvas únicamente un plan: quiero que construyas el bot completo en el proyecto actual.

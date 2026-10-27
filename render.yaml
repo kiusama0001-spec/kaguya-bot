@@ -1,0 +1,66 @@
+services:
+  - type: web
+    name: kaguya
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: corepack enable && corepack prepare pnpm@10.8.1 --activate && pnpm install --frozen-lockfile && PORT=10000 BASE_PATH=/ NODE_ENV=production pnpm build
+    preDeployCommand: pnpm db:migrate
+    startCommand: pnpm start
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+      - key: BASE_PATH
+        value: /
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kaguya-db
+          property: connectionString
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
+      - key: KAGUYA_GROQ_CHAT_RPM
+        value: "12"
+      - key: KAGUYA_WIKI_SEARCH_RPM
+        value: "10"
+      - key: GROQ_TRANSCRIPTION_MODEL
+        value: whisper-large-v3-turbo
+      - key: GROQ_VISION_MODEL
+        value: qwen/qwen3.8-27b
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: ELEVENLABS_VOICE_ID
+        sync: false
+      - key: ELEVENLABS_TTS_MODEL
+        value: eleven_multilingual_v2
+      - key: ELEVENLABS_ALLOW_GROUP_TTS
+        value: "false"
+      - key: BRAVE_SEARCH_API_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: VITE_CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: KAGUYA_ADMIN_EMAILS
+        sync: false
+      - key: KAGUYA_ADMIN_CLERK_USER_IDS
+        sync: false
+      - key: KAGUYA_KIU_TELEGRAM_IDS
+        sync: false
+      - key: KAGUYA_KALU_TELEGRAM_IDS
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+databases:
+  - name: kaguya-db
+    databaseName: kaguya
+    user: kaguya
+    plan: basic-256mb
+    region: oregon

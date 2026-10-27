@@ -1,0 +1,13 @@
+KAGUYA FINAL VERIFICATION
+
+Automated tests: 168 passed, 0 failed, 0 skipped (Node.js built-in test runner).
+Phrase corpus: 10,000 entries; exact category quotas met; exact duplicates 0; approximate duplicates 0; invalid entries 0.
+Editorial status: NOT READY. Repeated clauses: 1,997; repeated clause occurrences beyond first appearances: 12,012.
+
+Dependency installation: BLOCKED. `corepack pnpm install --frozen-lockfile` failed while Corepack tried to download pnpm@10.8.1 from https://registry.npmjs.org/pnpm/-/pnpm-10.8.1.tgz due to DNS EAI_AGAIN for registry.npmjs.org.
+Semantic TypeScript typecheck: NOT RUN successfully; pnpm/dependencies unavailable.
+Production build: NOT RUN successfully; pnpm/dependencies unavailable.
+Render config: basic structural check only; no YAML parser/deploy validation was available.
+Real integrations: Telegram, Clerk, PostgreSQL, Groq, PokéAPI, Brave Search, ElevenLabs and Render were not verified against live credentials/services.
+
+Important validator correction: overall `ready` now requires `editorialReady`; this corpus correctly returns NOT READY and cannot pass the phrase import gate as if editorially approved.

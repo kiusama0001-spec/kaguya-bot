@@ -1,0 +1,29 @@
+{
+  "name": "workspace",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
+    "build": "pnpm run typecheck && pnpm --filter @workspace/api-server build && PORT=10000 BASE_PATH=/ NODE_ENV=production pnpm --filter @workspace/kaguya build",
+    "typecheck:libs": "tsc --build",
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck",
+    "start": "node --env-file-if-exists=.env --enable-source-maps artifacts/api-server/dist/index.mjs",
+    "db:migrate": "pnpm --filter @workspace/db migrate:render",
+    "test": "node --test test/*.test.mjs",
+    "phrases:import": "pnpm --filter @workspace/db import:kaguya-phrases",
+    "phrases:import:kiwbot": "pnpm --filter @workspace/db import:kiwbot-phrases",
+    "phrases:validate:corpus": "node scripts/validate-phrase-corpus.mjs"
+  },
+  "private": true,
+  "dependencies": {
+    "@replit/connectors-sdk": "^0.4.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3"
+  },
+  "packageManager": "pnpm@10.8.1",
+  "engines": {
+    "node": ">=22.12.0 <23"
+  }
+}

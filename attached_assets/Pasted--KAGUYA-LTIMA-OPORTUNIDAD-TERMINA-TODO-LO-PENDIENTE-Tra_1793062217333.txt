@@ -1,0 +1,113 @@
+# KAGUYA — ÚLTIMA OPORTUNIDAD: TERMINA TODO LO PENDIENTE
+
+Trabaja directamente sobre el proyecto existente de Kaguya y su última versión corregida. **NO empieces de cero, NO me entregues otro plan y NO te limites a generar informes. Implementa las funciones pendientes, corrige los errores y termina el proyecto ahora.**
+
+Utiliza la auditoría y los resultados anteriores como referencia. Conserva lo que funciona y modifica el código real.
+
+## 1. ARREGLA LAS 10,000 FRASES
+
+El corpus ya tiene 10,000 entradas y las cuotas de sus 11 categorías están cumplidas, pero sigue marcado como `NOT READY` por 1,997 fragmentos repetidos y 12,012 apariciones repetidas.
+
+Revisa y reescribe las frases realmente afectadas. No te limites a cambiar sinónimos, nombres o emojis. Cada frase debe ser útil, natural, contextual y suficientemente distinta.
+
+Conserva exactamente estas cantidades:
+
+- Personalidad general: 1,200.
+- Especiales para Kiu: 1,500.
+- Especiales para Kalu: 200.
+- Moderación: 1,200.
+- Pokémon: 1,000.
+- GIFs y reacciones: 1,200.
+- Recordatorios, clientes, rentas y pagos: 600.
+- BDSM educativo: 800.
+- Eventos y concursos: 800.
+- Ayuda y comandos: 600.
+- IA y respuestas contextuales: 900.
+
+**Total: 10,000 frases.**
+
+Conserva las frases útiles de Kiwbot que ya se incorporaron y no modifiques su ZIP original. Mantén separados los repertorios de Kiu y Kalu. No reduzcas las cuotas, elimines contenido sin reemplazarlo ni alteres el validador solamente para conseguir un resultado aprobado.
+
+Ejecuta el validador sobre el contenido definitivo. Corrige las repeticiones editoriales reales y entrega un resultado `ready=true` únicamente si se cumplen de verdad todos los criterios.
+
+## 2. CONSIGUE QUE EL PROYECTO COMPILE
+
+Hasta ahora no se completaron la instalación congelada, el typecheck semántico ni el build porque pnpm no pudo descargarse por un error DNS.
+
+Resuelve este bloqueo usando un entorno de instalación que funcione. Instala las dependencias respetando `pnpm-lock.yaml` y la versión requerida de pnpm.
+
+Ejecuta y corrige los errores de:
+- Instalación congelada.
+- Typecheck completo de TypeScript.
+- Pruebas automatizadas.
+- Build de producción de todos los paquetes.
+- Migraciones y configuración de Render.
+- Arranque del servidor, panel y bot.
+
+No sustituyas estas comprobaciones por análisis sintáctico ni afirmes que terminaron si no se ejecutaron correctamente.
+
+## 3. COMPLETA LOS MÓDULOS QUE FALTAN
+
+Implementa y conecta estas funciones pendientes:
+
+**Pokédex:** evoluciones, movimientos, objetos, efectividad de tipos, debilidades, resistencias y recomendaciones de equipos. Utiliza datos reales y caché.
+
+**Wiki:** búsqueda funcional de información, resúmenes en español y enlaces verificables. Prioriza fuentes oficiales y primarias. No te limites a mostrar una lista fija de enlaces.
+
+**Clientes, rentas y pagos:** cálculo correcto de saldos, pagos parciales, vencimientos, historial y notificaciones periódicas.
+
+**Panel web:** termina la gestión avanzada de usuarios, copias de seguridad, restauración, importación y exportación seguras, configuración de grupos, permisos, frases, GIFs, imágenes y mensajes personalizados para sanciones.
+
+**Eventos y concursos:** añade sorteos verificables, eventos recurrentes y herramientas de participación compatibles con las funciones reales de Telegram.
+
+**Moderación:** mejora la protección contra spam y flood para varios tipos de mensajes, contempla ejecuciones concurrentes y corrige las operaciones que puedan quedar incompletas.
+
+**Recordatorios:** evita duplicados incluso si Telegram entrega un mensaje y el proceso se reinicia antes de registrar su estado. Implementa recuperación y trazabilidad.
+
+**Kiu y Kalu:** verifica que los ID de Telegram controlen realmente sus respuestas especiales y que ningún usuario pueda hacerse pasar por ellos cambiando su nombre.
+
+## 4. ASEGURA LAS FUNCIONES CRÍTICAS
+
+Comprueba y corrige:
+
+- El arranque real del bot y su integración con el panel.
+- La autenticación de Clerk y los permisos administrativos.
+- La conexión con Groq y el fallback cuando falla la IA.
+- La memoria persistente sin guardar conversaciones duplicadas.
+- Los filtros, bienvenidas, despedidas, GIFs y plantillas que se configuran en el panel.
+- Los silencios, bans y sanciones temporales.
+- La restauración de todos los permisos anteriores al retirar un silencio, incluidos texto, fotos, vídeos, audios, GIFs, stickers, documentos, encuestas y reacciones cuando Telegram los admita.
+- La persistencia tras los reinicios y la recuperación de tareas incompletas.
+- La privacidad de los datos y la protección de las credenciales.
+
+Cuando se retire un silencio, no concedas permisos que el usuario no tenía antes. Si no puedes recuperar un permiso con certeza, informa del problema en lugar de inventar su valor.
+
+## 5. TERMINA LAS INTEGRACIONES Y EL DESPLIEGUE
+
+Deja preparada la configuración real para Telegram, PostgreSQL, Clerk, Groq, PokéAPI, búsqueda web y ElevenLabs.
+
+Comprueba las versiones de los modelos, endpoints y bibliotecas utilizados. No presupongas que un modelo o endpoint sigue disponible.
+
+Revisa `render.yaml`, las variables de entorno, las rutas de producción, las migraciones y los trabajadores en segundo plano. Asegura que el panel y el bot arranquen correctamente y que el estado `online` refleje el estado verdadero.
+
+No expongas tokens ni credenciales. No marques una integración como verificada si no dispones de sus credenciales y no has realizado una prueba real.
+
+## 6. PRUEBAS Y ENTREGA DEFINITIVA
+
+Mantén y amplía las pruebas actuales. Ejecuta las 168 pruebas existentes y añade las necesarias para las funciones que completes.
+
+Al terminar, proporciona:
+
+1. El proyecto actualizado y completo, con todos sus archivos.
+2. El ZIP final descargable desde Replit.
+3. Las cantidades de frases y el resultado editorial definitivo.
+4. El resultado real del typecheck y del build.
+5. El número de pruebas aprobadas y fallidas.
+6. Las comprobaciones de persistencia, permisos y recuperación.
+7. Las variables de entorno que aún debo configurar.
+8. Los pasos exactos para desplegar en Render.
+9. Cualquier prueba externa que realmente no haya podido ejecutarse.
+
+**No te detengas en el diagnóstico. No me preguntes si quieres que continúes. Continúa hasta completar todo lo que puedas implementar y verificar en esta ejecución. No marques Kaguya como terminado mientras falten los requisitos indicados o existan errores conocidos sin resolver.**
+
+Quiero el bot Kaguya completo, no una nueva versión de demostración, ni otro informe de pendientes. Usa el proyecto existente, corrige todo lo que puedas, ejecuta las pruebas y entrega el resultado real.

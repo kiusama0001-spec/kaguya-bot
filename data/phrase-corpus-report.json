@@ -1,0 +1,1480 @@
+{
+  "total": 10000,
+  "targetTotal": 10000,
+  "kiwbotOriginal": 754,
+  "kaguyaAuthored": 9246,
+  "exactDuplicates": 0,
+  "approximateDuplicates": 0,
+  "invalidEntries": 0,
+  "repeatedClauseCount": 1997,
+  "repeatedClauseOccurrences": 12012,
+  "editorialReady": false,
+  "editorialNote": "Este detector es una señal de reutilización de fragmentos, no una evaluación semántica humana. Un valor distinto de cero exige revisión editorial; no demuestra por sí solo que dos frases completas sean duplicadas.",
+  "repeatedClauseExamples": [
+    {
+      "clause": "no todo se resuelve a fuerza de voluntad",
+      "count": 67,
+      "entries": [
+        {
+          "index": 1200,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        },
+        {
+          "index": 1210,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        },
+        {
+          "index": 1236,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        },
+        {
+          "index": 1243,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        },
+        {
+          "index": 1256,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        },
+        {
+          "index": 1270,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        },
+        {
+          "index": 1277,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        },
+        {
+          "index": 1292,
+          "category": "especial_kiu",
+          "text": "Kiu, no todo se resuelve a fuerza de voluntad"
+        }
+      ]
+    },
+    {
+      "clause": "tuviera que apostar por tu mejor decisión sería esta",
+      "count": 67,
+      "entries": [
+        {
+          "index": 1202,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        },
+        {
+          "index": 1264,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        },
+        {
+          "index": 1279,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        },
+        {
+          "index": 1310,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        },
+        {
+          "index": 1329,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        },
+        {
+          "index": 1358,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        },
+        {
+          "index": 1359,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        },
+        {
+          "index": 1371,
+          "category": "especial_kiu",
+          "text": "Si tuviera que apostar por tu mejor decisión, Kiu, sería esta"
+        }
+      ]
+    },
+    {
+      "clause": "ni una ni su creador ganan discutiendo con los hechos",
+      "count": 67,
+      "entries": [
+        {
+          "index": 1207,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        },
+        {
+          "index": 1213,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        },
+        {
+          "index": 1233,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        },
+        {
+          "index": 1268,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        },
+        {
+          "index": 1301,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        },
+        {
+          "index": 1307,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        },
+        {
+          "index": 1372,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        },
+        {
+          "index": 1389,
+          "category": "especial_kiu",
+          "text": "Ni una reina ni su creador ganan discutiendo con los hechos"
+        }
+      ]
+    },
+    {
+      "clause": "puedes con mucho pero no tienes que resolverlo todo a la vez",
+      "count": 67,
+      "entries": [
+        {
+          "index": 1257,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        },
+        {
+          "index": 1320,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        },
+        {
+          "index": 1342,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        },
+        {
+          "index": 1364,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        },
+        {
+          "index": 1383,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        },
+        {
+          "index": 1413,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        },
+        {
+          "index": 1430,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        },
+        {
+          "index": 1431,
+          "category": "especial_kiu",
+          "text": "Kiu, puedes con mucho, pero no tienes que resolverlo todo a la vez"
+        }
+      ]
+    },
+    {
+      "clause": "la diferencia entre juego consensuado y daño está en los límites",
+      "count": 56,
+      "entries": [
+        {
+          "index": 6908,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        },
+        {
+          "index": 6917,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        },
+        {
+          "index": 6926,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        },
+        {
+          "index": 6931,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        },
+        {
+          "index": 6939,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        },
+        {
+          "index": 6960,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        },
+        {
+          "index": 6985,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        },
+        {
+          "index": 7000,
+          "category": "bdsm_educativo",
+          "text": "La diferencia entre juego consensuado y daño está en los límites"
+        }
+      ]
+    },
+    {
+      "clause": "elimina el mensaje solo si la política y los permisos lo permiten",
+      "count": 46,
+      "entries": [
+        {
+          "index": 2929,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        },
+        {
+          "index": 2931,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        },
+        {
+          "index": 2956,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        },
+        {
+          "index": 2994,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        },
+        {
+          "index": 3019,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        },
+        {
+          "index": 3036,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        },
+        {
+          "index": 3060,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        },
+        {
+          "index": 3071,
+          "category": "moderacion_administracion",
+          "text": "elimina el mensaje solo si la política y los permisos lo permiten"
+        }
+      ]
+    },
+    {
+      "clause": "registra el mensaje la regla y el resultado de la acción",
+      "count": 45,
+      "entries": [
+        {
+          "index": 2922,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        },
+        {
+          "index": 2961,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        },
+        {
+          "index": 2966,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        },
+        {
+          "index": 2998,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        },
+        {
+          "index": 3006,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        },
+        {
+          "index": 3012,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        },
+        {
+          "index": 3030,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        },
+        {
+          "index": 3070,
+          "category": "moderacion_administracion",
+          "text": "registra el mensaje, la regla y el resultado de la acción"
+        }
+      ]
+    },
+    {
+      "clause": "notifica al usuario sin publicar información privada",
+      "count": 44,
+      "entries": [
+        {
+          "index": 2928,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        },
+        {
+          "index": 2940,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        },
+        {
+          "index": 2993,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        },
+        {
+          "index": 3009,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        },
+        {
+          "index": 3018,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        },
+        {
+          "index": 3101,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        },
+        {
+          "index": 3107,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        },
+        {
+          "index": 3178,
+          "category": "moderacion_administracion",
+          "text": "notifica al usuario sin publicar información privada"
+        }
+      ]
+    },
+    {
+      "clause": "consulta la ficha y el endpoint fuente antes de compartir el dato",
+      "count": 44,
+      "entries": [
+        {
+          "index": 4105,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        },
+        {
+          "index": 4155,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        },
+        {
+          "index": 4170,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        },
+        {
+          "index": 4227,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        },
+        {
+          "index": 4239,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        },
+        {
+          "index": 4248,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        },
+        {
+          "index": 4275,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        },
+        {
+          "index": 4290,
+          "category": "pokemon_pokedex",
+          "text": "consulta la ficha y el endpoint fuente antes de compartir el dato"
+        }
+      ]
+    },
+    {
+      "clause": "elige el formato de combate antes de comparar opciones",
+      "count": 44,
+      "entries": [
+        {
+          "index": 4106,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        },
+        {
+          "index": 4125,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        },
+        {
+          "index": 4127,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        },
+        {
+          "index": 4141,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        },
+        {
+          "index": 4147,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        },
+        {
+          "index": 4163,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        },
+        {
+          "index": 4177,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        },
+        {
+          "index": 4205,
+          "category": "pokemon_pokedex",
+          "text": "elige el formato de combate antes de comparar opciones"
+        }
+      ]
+    },
+    {
+      "clause": "conserva el error y deja la operación como pendiente de revisión",
+      "count": 43,
+      "entries": [
+        {
+          "index": 2901,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        },
+        {
+          "index": 2932,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        },
+        {
+          "index": 2958,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        },
+        {
+          "index": 2968,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        },
+        {
+          "index": 2972,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        },
+        {
+          "index": 2985,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        },
+        {
+          "index": 3017,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        },
+        {
+          "index": 3021,
+          "category": "moderacion_administracion",
+          "text": "conserva el error y deja la operación como pendiente de revisión"
+        }
+      ]
+    },
+    {
+      "clause": "pide una segunda revisión cuando falte contexto",
+      "count": 43,
+      "entries": [
+        {
+          "index": 2904,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        },
+        {
+          "index": 2926,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        },
+        {
+          "index": 2991,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        },
+        {
+          "index": 3041,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        },
+        {
+          "index": 3051,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        },
+        {
+          "index": 3069,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        },
+        {
+          "index": 3076,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        },
+        {
+          "index": 3098,
+          "category": "moderacion_administracion",
+          "text": "pide una segunda revisión cuando falte contexto"
+        }
+      ]
+    },
+    {
+      "clause": "oculta datos sensibles en las notas visibles al grupo",
+      "count": 42,
+      "entries": [
+        {
+          "index": 2906,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        },
+        {
+          "index": 2997,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        },
+        {
+          "index": 3011,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        },
+        {
+          "index": 3015,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        },
+        {
+          "index": 3029,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        },
+        {
+          "index": 3040,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        },
+        {
+          "index": 3045,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        },
+        {
+          "index": 3056,
+          "category": "moderacion_administracion",
+          "text": "oculta datos sensibles en las notas visibles al grupo"
+        }
+      ]
+    },
+    {
+      "clause": "avisa al administrador si no es posible restaurar permisos con certeza",
+      "count": 42,
+      "entries": [
+        {
+          "index": 2934,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        },
+        {
+          "index": 2935,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        },
+        {
+          "index": 2955,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        },
+        {
+          "index": 3037,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        },
+        {
+          "index": 3055,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        },
+        {
+          "index": 3073,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        },
+        {
+          "index": 3074,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        },
+        {
+          "index": 3130,
+          "category": "moderacion_administracion",
+          "text": "avisa al administrador si no es posible restaurar permisos con certeza"
+        }
+      ]
+    },
+    {
+      "clause": "elige una reacción corta y deja que el grupo complete el chiste",
+      "count": 42,
+      "entries": [
+        {
+          "index": 5133,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        },
+        {
+          "index": 5156,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        },
+        {
+          "index": 5165,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        },
+        {
+          "index": 5169,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        },
+        {
+          "index": 5174,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        },
+        {
+          "index": 5207,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        },
+        {
+          "index": 5226,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        },
+        {
+          "index": 5267,
+          "category": "gifs_bromas_reacciones",
+          "text": "elige una reacción corta y deja que el grupo complete el chiste"
+        }
+      ]
+    },
+    {
+      "clause": "termina la broma cuando la otra persona marque el límite",
+      "count": 42,
+      "entries": [
+        {
+          "index": 5134,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        },
+        {
+          "index": 5167,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        },
+        {
+          "index": 5176,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        },
+        {
+          "index": 5239,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        },
+        {
+          "index": 5242,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        },
+        {
+          "index": 5250,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        },
+        {
+          "index": 5256,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        },
+        {
+          "index": 5276,
+          "category": "gifs_bromas_reacciones",
+          "text": "termina la broma cuando la otra persona marque el límite"
+        }
+      ]
+    },
+    {
+      "clause": "aplica primero la medida menos restrictiva que resulte suficiente",
+      "count": 41,
+      "entries": [
+        {
+          "index": 2920,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        },
+        {
+          "index": 2937,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        },
+        {
+          "index": 2945,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        },
+        {
+          "index": 2947,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        },
+        {
+          "index": 2973,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        },
+        {
+          "index": 2988,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        },
+        {
+          "index": 3025,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        },
+        {
+          "index": 3068,
+          "category": "moderacion_administracion",
+          "text": "aplica primero la medida menos restrictiva que resulte suficiente"
+        }
+      ]
+    },
+    {
+      "clause": "evita repetir automáticamente una operación cuyo resultado sea incierto",
+      "count": 41,
+      "entries": [
+        {
+          "index": 3058,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        },
+        {
+          "index": 3084,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        },
+        {
+          "index": 3106,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        },
+        {
+          "index": 3189,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        },
+        {
+          "index": 3223,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        },
+        {
+          "index": 3253,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        },
+        {
+          "index": 3266,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        },
+        {
+          "index": 3302,
+          "category": "moderacion_administracion",
+          "text": "evita repetir automáticamente una operación cuyo resultado sea incierto"
+        }
+      ]
+    },
+    {
+      "clause": "mantén la recomendación como orientación y no como garantía",
+      "count": 41,
+      "entries": [
+        {
+          "index": 4115,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        },
+        {
+          "index": 4168,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        },
+        {
+          "index": 4234,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        },
+        {
+          "index": 4242,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        },
+        {
+          "index": 4286,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        },
+        {
+          "index": 4298,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        },
+        {
+          "index": 4327,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        },
+        {
+          "index": 4342,
+          "category": "pokemon_pokedex",
+          "text": "mantén la recomendación como orientación y no como garantía"
+        }
+      ]
+    },
+    {
+      "clause": "revisa la efectividad de cada tipo antes de decidir la cobertura",
+      "count": 41,
+      "entries": [
+        {
+          "index": 4121,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        },
+        {
+          "index": 4145,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        },
+        {
+          "index": 4228,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        },
+        {
+          "index": 4257,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        },
+        {
+          "index": 4267,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        },
+        {
+          "index": 4279,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        },
+        {
+          "index": 4281,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        },
+        {
+          "index": 4309,
+          "category": "pokemon_pokedex",
+          "text": "revisa la efectividad de cada tipo antes de decidir la cobertura"
+        }
+      ]
+    },
+    {
+      "clause": "permite que otro usuario tenga la última palabra",
+      "count": 41,
+      "entries": [
+        {
+          "index": 5107,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        },
+        {
+          "index": 5118,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        },
+        {
+          "index": 5175,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        },
+        {
+          "index": 5229,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        },
+        {
+          "index": 5235,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        },
+        {
+          "index": 5282,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        },
+        {
+          "index": 5289,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        },
+        {
+          "index": 5340,
+          "category": "gifs_bromas_reacciones",
+          "text": "permite que otro usuario tenga la última palabra"
+        }
+      ]
+    },
+    {
+      "clause": "prefiere una ocurrencia nueva a repetir la misma frase",
+      "count": 41,
+      "entries": [
+        {
+          "index": 5112,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        },
+        {
+          "index": 5129,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        },
+        {
+          "index": 5177,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        },
+        {
+          "index": 5179,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        },
+        {
+          "index": 5215,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        },
+        {
+          "index": 5237,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        },
+        {
+          "index": 5253,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        },
+        {
+          "index": 5277,
+          "category": "gifs_bromas_reacciones",
+          "text": "prefiere una ocurrencia nueva a repetir la misma frase"
+        }
+      ]
+    },
+    {
+      "clause": "deja espacio para que la conversación cambie de tema",
+      "count": 41,
+      "entries": [
+        {
+          "index": 5116,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        },
+        {
+          "index": 5140,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        },
+        {
+          "index": 5144,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        },
+        {
+          "index": 5149,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        },
+        {
+          "index": 5228,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        },
+        {
+          "index": 5284,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        },
+        {
+          "index": 5319,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        },
+        {
+          "index": 5391,
+          "category": "gifs_bromas_reacciones",
+          "text": "deja espacio para que la conversación cambie de tema"
+        }
+      ]
+    },
+    {
+      "clause": "evita enviar cinco gifs para comunicar una sola idea",
+      "count": 41,
+      "entries": [
+        {
+          "index": 5141,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        },
+        {
+          "index": 5159,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        },
+        {
+          "index": 5168,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        },
+        {
+          "index": 5201,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        },
+        {
+          "index": 5213,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        },
+        {
+          "index": 5225,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        },
+        {
+          "index": 5257,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        },
+        {
+          "index": 5299,
+          "category": "gifs_bromas_reacciones",
+          "text": "evita enviar cinco gifs para comunicar una sola idea"
+        }
+      ]
+    },
+    {
+      "clause": "consulta la fecha y la fuente de cada dato externo",
+      "count": 40,
+      "entries": [
+        {
+          "index": 4114,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        },
+        {
+          "index": 4136,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        },
+        {
+          "index": 4162,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        },
+        {
+          "index": 4178,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        },
+        {
+          "index": 4183,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        },
+        {
+          "index": 4189,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        },
+        {
+          "index": 4213,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        },
+        {
+          "index": 4216,
+          "category": "pokemon_pokedex",
+          "text": "consulta la fecha y la fuente de cada dato externo"
+        }
+      ]
+    },
+    {
+      "clause": "incluye la forma regional exacta en la búsqueda",
+      "count": 40,
+      "entries": [
+        {
+          "index": 4129,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        },
+        {
+          "index": 4154,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        },
+        {
+          "index": 4164,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        },
+        {
+          "index": 4167,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        },
+        {
+          "index": 4198,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        },
+        {
+          "index": 4208,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        },
+        {
+          "index": 4219,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        },
+        {
+          "index": 4259,
+          "category": "pokemon_pokedex",
+          "text": "incluye la forma regional exacta en la búsqueda"
+        }
+      ]
+    },
+    {
+      "clause": "contrasta los resultados con pokéapi cuando tengas dudas",
+      "count": 40,
+      "entries": [
+        {
+          "index": 4139,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        },
+        {
+          "index": 4148,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        },
+        {
+          "index": 4169,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        },
+        {
+          "index": 4263,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        },
+        {
+          "index": 4277,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        },
+        {
+          "index": 4284,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        },
+        {
+          "index": 4293,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        },
+        {
+          "index": 4299,
+          "category": "pokemon_pokedex",
+          "text": "contrasta los resultados con PokéAPI cuando tengas dudas"
+        }
+      ]
+    },
+    {
+      "clause": "cierra el intercambio con una salida elegante",
+      "count": 40,
+      "entries": [
+        {
+          "index": 5113,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        },
+        {
+          "index": 5151,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        },
+        {
+          "index": 5216,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        },
+        {
+          "index": 5249,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        },
+        {
+          "index": 5291,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        },
+        {
+          "index": 5308,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        },
+        {
+          "index": 5313,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        },
+        {
+          "index": 5339,
+          "category": "gifs_bromas_reacciones",
+          "text": "cierra el intercambio con una salida elegante"
+        }
+      ]
+    },
+    {
+      "clause": "reserva la reacción más dramática para el momento adecuado",
+      "count": 40,
+      "entries": [
+        {
+          "index": 5119,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        },
+        {
+          "index": 5182,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        },
+        {
+          "index": 5191,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        },
+        {
+          "index": 5283,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        },
+        {
+          "index": 5311,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        },
+        {
+          "index": 5316,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        },
+        {
+          "index": 5351,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        },
+        {
+          "index": 5397,
+          "category": "gifs_bromas_reacciones",
+          "text": "reserva la reacción más dramática para el momento adecuado"
+        }
+      ]
+    },
+    {
+      "clause": "usa el gif después del mensaje que le da contexto",
+      "count": 40,
+      "entries": [
+        {
+          "index": 5120,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        },
+        {
+          "index": 5173,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        },
+        {
+          "index": 5193,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        },
+        {
+          "index": 5202,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        },
+        {
+          "index": 5208,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        },
+        {
+          "index": 5270,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        },
+        {
+          "index": 5312,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        },
+        {
+          "index": 5363,
+          "category": "gifs_bromas_reacciones",
+          "text": "usa el gif después del mensaje que le da contexto"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "category": "personalidad_conversacion_general",
+      "target": 1200,
+      "actual": 1200,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "especial_kiu",
+      "target": 1500,
+      "actual": 1500,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "especial_kalu",
+      "target": 200,
+      "actual": 200,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "moderacion_administracion",
+      "target": 1200,
+      "actual": 1200,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "pokemon_pokedex",
+      "target": 1000,
+      "actual": 1000,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "gifs_bromas_reacciones",
+      "target": 1200,
+      "actual": 1200,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "recordatorios_clientes_rentas_pagos",
+      "target": 600,
+      "actual": 600,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "bdsm_educativo",
+      "target": 800,
+      "actual": 800,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "eventos_bienvenidas_despedidas_concursos",
+      "target": 800,
+      "actual": 800,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "ayuda_errores_comandos",
+      "target": 600,
+      "actual": 600,
+      "deficit": 0,
+      "excess": 0
+    },
+    {
+      "category": "ia_estados_animo_contexto",
+      "target": 900,
+      "actual": 900,
+      "deficit": 0,
+      "excess": 0
+    }
+  ],
+  "examples": {
+    "exact": [],
+    "approximate": [],
+    "invalid": []
+  },
+  "ready": false
+}

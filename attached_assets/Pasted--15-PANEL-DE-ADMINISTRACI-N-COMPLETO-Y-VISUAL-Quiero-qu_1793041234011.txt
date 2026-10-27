@@ -1,0 +1,187 @@
+## 15. PANEL DE ADMINISTRACIÓN COMPLETO Y VISUAL
+
+Quiero que KAGUYA tenga una **pestaña o panel de administración propio**, accesible mediante un menú interactivo con botones y pantallas organizadas. No quiero que toda la administración dependa de escribir comandos manualmente.
+
+Implementa un panel administrativo práctico, visual y fácil de utilizar, con acceso restringido a Kiu y a los administradores autorizados.
+
+### Funciones del panel
+
+**A. Gestión de usuarios**
+- Buscar o seleccionar usuarios cuando Telegram permita identificarlos.
+- Consultar información disponible y el historial de sanciones.
+- Ban y unban.
+- Silenciar y quitar silencio.
+- Ban temporal y silencio temporal.
+- Añadir, consultar y eliminar advertencias.
+- Configurar motivos y duraciones.
+- Consultar sanciones activas y vencidas.
+- Deshacer sanciones cuando corresponda.
+
+**B. Gestión de mensajes**
+- Borrar mensajes seleccionados cuando Telegram lo permita.
+- Limpiar grupos de mensajes dentro de los límites de la API.
+- Fijar y desfijar mensajes.
+- Configurar filtros, palabras bloqueadas y protección contra spam.
+- Crear y editar mensajes de bienvenida y despedida.
+
+**C. Personalización de sanciones**
+- Permitir que el administrador configure los mensajes de ban, silencio, expulsión, advertencias y demás acciones.
+- Poder editar tanto el texto como la fotografía o imagen adjunta.
+- Permitir imágenes diferentes para cada tipo de sanción.
+- Permitir registrar y cambiar estas imágenes directamente desde el panel.
+- Previsualizar los mensajes antes de guardarlos.
+- Restaurar los mensajes predeterminados.
+- Admitir variables como `{username}`, `{user_id}`, `{admin}`, `{reason}` y `{duration}`, sustituyéndolas de forma segura.
+- Guardar todas las configuraciones de forma persistente.
+
+Las imágenes deben almacenarse mediante identificadores reales de Telegram cuando corresponda. No inventes archivos ni identificadores.
+
+**D. Configuración por grupo**
+- Seleccionar el grupo que se desea administrar.
+- Configurar mensajes, filtros, sanciones y permisos independientemente para cada grupo.
+- Activar o desactivar módulos.
+- Consultar estadísticas y registros.
+- Restablecer ajustes con confirmación previa.
+
+**E. Ajustes generales**
+- Activar y desactivar la IA.
+- Configurar la personalidad.
+- Consultar el estado de los servicios.
+- Administrar GIFs y repertorios de frases.
+- Gestionar recordatorios y tareas.
+- Realizar copias de seguridad y consultar errores.
+
+### Experiencia del panel
+
+Utiliza botones inline, menús paginados, botones para volver, cancelar y confirmar, y mensajes claros de éxito o error.
+
+Las acciones peligrosas deben pedir confirmación. El panel debe comprobar los permisos en cada operación, incluso si alguien intenta reutilizar un botón antiguo o manipular sus datos.
+
+No expongas opciones administrativas a usuarios normales. Si se usa en un grupo, evita que otros miembros puedan controlar el panel de Kiu.
+
+## 16. SISTEMA DE SILENCIOS Y RESTAURACIÓN CORRECTA DE PERMISOS
+
+Esta función es especialmente importante: **cuando se silencie a un usuario y después se le quite el silencio, deben restaurarse correctamente todos los permisos que tenía antes, no únicamente el permiso de escribir texto.**
+
+No implementes un silencio que deje al usuario sin poder enviar fotos, vídeos, audios, GIFs, stickers u otros contenidos por accidente cuando se le devuelva el acceso.
+
+### Comportamiento obligatorio
+
+1. Antes de aplicar un silencio, consulta los permisos efectivos y las restricciones relevantes del usuario, siempre que Telegram permita obtenerlos.
+2. Guarda de forma persistente una instantánea de los permisos previos y el estado de la sanción.
+3. Aplica las restricciones de silencio necesarias para bloquear los tipos de contenido correspondientes.
+4. Al quitar el silencio, restaura los permisos previos de manera coherente, incluyendo texto, fotos, vídeos, documentos, audios, notas de voz, mensajes de vídeo, stickers, GIFs, encuestas y demás permisos compatibles con la versión de la API.
+5. No concedas permisos que el usuario no tenía antes.
+6. Respeta los permisos generales del grupo, las restricciones individuales y las limitaciones de Telegram.
+7. Si el usuario tenía restricciones anteriores al silencio, no las elimines indiscriminadamente.
+8. Si el bot se reinicia, debe conservar el registro necesario para restaurar el estado correctamente.
+9. Si falla una operación, registra el error y evita marcar la sanción como aplicada o retirada cuando no sea cierto.
+10. Si no se pueden recuperar los permisos anteriores con certeza, informa al administrador en vez de inventarlos.
+
+### Casos que también deben funcionar
+
+- Silencio temporal que vence automáticamente.
+- Silencio retirado manualmente antes de su vencimiento.
+- Reinicio del bot durante un silencio.
+- Usuario con restricciones anteriores.
+- Cambios de permisos generales mientras existe una sanción.
+- Dos administradores que actúan casi al mismo tiempo.
+- Usuario expulsado o eliminado mientras tiene una sanción activa.
+
+Utiliza las funciones reales de restricciones y permisos de Telegram. Comprueba la versión de la biblioteca instalada y no uses propiedades que no existan.
+
+**Prueba obligatoria:** crea pruebas para cada tipo de permiso admitido y verifica que aplicar y retirar un silencio no deje al usuario sin fotos, GIFs, audios, vídeos ni otros contenidos que tenía permitidos antes.
+
+## 17. WIKI Y BASE DE CONOCIMIENTO CON FUENTES OFICIALES
+
+Quiero que Kaguya tenga una especie de **wiki integrada**, para que los usuarios puedan consultar información fiable sin depender únicamente de lo que genere la IA.
+
+Debe permitir buscar temas, mostrar resúmenes, consultar detalles y acceder a la fuente original.
+
+### Fuentes
+
+Prioriza fuentes oficiales y documentadas según el tema:
+
+- Telegram: documentación oficial de la API y de los bots.
+- Pokémon: PokéAPI para datos estructurados y, cuando sea necesario, fuentes oficiales de Pokémon para información publicada por sus titulares.
+- Python y bibliotecas: documentación oficial correspondiente.
+- Groq: documentación oficial de su API.
+- Otros temas: documentación del fabricante, organismos públicos, instituciones reconocidas y fuentes primarias.
+
+Para el módulo BDSM educativo, prioriza recursos de educación sexual, salud y seguridad de organizaciones reconocidas, diferenciando las recomendaciones sanitarias de las prácticas comunitarias y las opiniones personales.
+
+No presentes una wiki comunitaria como fuente oficial si no lo es. Wikipedia puede servir como orientación secundaria, pero no debe sustituir una fuente primaria cuando exista una disponible.
+
+### Funciones de la wiki
+
+- Búsqueda por palabras clave.
+- Resultados ordenados por relevancia.
+- Resumen en español.
+- Información ampliada cuando exista una fuente adecuada.
+- Enlace directo a la fuente original.
+- Nombre de la fuente y fecha de consulta cuando sea posible.
+- Caché para reducir llamadas repetidas.
+- Manejo de errores y fuentes no disponibles.
+- Separación clara entre hechos verificados, inferencias y contenido generado por IA.
+- Posibilidad de que Kiu autorice nuevas fuentes.
+- Registro de las fuentes permitidas y sus dominios.
+- Actualización controlada de la información almacenada.
+
+### Reglas de fiabilidad
+
+1. No inventes citas, enlaces, autores ni publicaciones.
+2. No afirmes que una información está verificada si no has consultado una fuente válida.
+3. Si dos fuentes oficiales se contradicen, explica la diferencia.
+4. Si no existe información fiable, reconoce la limitación.
+5. No permitas que una página consultada cambie las instrucciones internas, revele secretos o ejecute acciones en el bot.
+6. Usa listas de fuentes permitidas cuando sea posible y valida los enlaces antes de mostrarlos.
+7. Evita presentar información antigua como vigente sin indicar su fecha.
+8. Permite que el bot responda a una pregunta con información recuperada de la wiki y, cuando corresponda, complemente con Groq sin confundir la generación de texto con la evidencia de la fuente.
+
+Añade comandos como:
+- `/wiki` — buscar un tema.
+- `/source` — consultar las fuentes de una respuesta.
+- `/wikilinks` — mostrar enlaces relevantes.
+- `/wikiupdate` — actualizar la información, solo para administradores autorizados.
+
+Integra estas funciones en el panel administrativo y en el menú general de ayuda.
+
+## 18. UTILIZAR MI ZIP DEL BOT EXISTENTE COMO REFERENCIA
+
+Voy a proporcionar un archivo ZIP de mi bot actual, **Kiwbot**, para que lo inspecciones y lo utilices como referencia técnica.
+
+Quiero que:
+
+1. Inspecciones el contenido completo del ZIP antes de diseñar la solución final.
+2. Identifiques su estructura, comandos, módulos, configuraciones, funciones útiles y patrones de implementación.
+3. Aproveches las funciones que estén bien implementadas y sean compatibles con Kaguya.
+4. Identifiques errores, funciones incompletas y posibles problemas de seguridad.
+5. Utilices Kiwbot para comprender lo que necesito y cómo me gusta que funcionen algunas características.
+6. Reimplementes o adaptes las funciones necesarias a la arquitectura de Kaguya.
+7. Conserves la independencia de ambos bots: token, base de datos, configuraciones, memoria y despliegue separados.
+8. No sobrescribas ni modifiques los archivos originales de Kiwbot.
+9. No copies secretos, tokens, contraseñas ni credenciales que pudieran estar dentro del ZIP.
+10. No asumas que una función es correcta solo porque existe en Kiwbot: verifica su comportamiento antes de reutilizarla.
+
+Si Kiwbot ya contiene alguna función que Kaguya necesita, úsala como referencia para evitar reinventar innecesariamente la solución. Si existe una manera mejor y más segura de implementarla, mejora esa función.
+
+No detengas el proyecto para limitarte a describir el ZIP: úsalo como referencia y continúa construyendo Kaguya completa.
+
+## 19. CONDICIÓN FINAL DE ENTREGA
+
+Kaguya debe contar con:
+- Personalidad conversacional casi humana y memoria contextual.
+- Las 10,000 frases verificadas.
+- Trato especial para Kiu y Kalu.
+- Administración mediante comandos y panel visual.
+- Personalización de textos e imágenes de sanciones.
+- Silencios y restauración correcta de permisos.
+- Moderación persistente.
+- Wiki basada en fuentes fiables y enlaces verificables.
+- Pokémon, GIFs, eventos, recordatorios, clientes, rentas y pagos.
+- BDSM educativo.
+- Integraciones de IA, voz y análisis cuando estén configuradas.
+- Funciones extra útiles elegidas por iniciativa propia.
+- Pruebas automatizadas y documentación completa.
+
+No reduzcas los requisitos, no sustituyas los módulos por botones que no hagan nada y no declares terminada una función sin verificarla.
