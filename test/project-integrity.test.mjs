@@ -165,7 +165,11 @@ test('wiki performs real search and returns source-backed results without invent
 });
 test('GIF command sends Telegram file IDs and increments use count only after successful send', () => {
   const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
-  assert.match(bot, /sendTelegramAnimation\(chatId, choice\.fileId\)/); assert.match(bot, /usageCount: choice\.usageCount \+ 1/);
+  const sendAt = bot.indexOf('await sendTelegramAnimation(chatId, choice.fileId)');
+  const updateAt = bot.indexOf('await db.update(gifRecords).set({ usageCount: sql`${gifRecords.usageCount} + 1` })');
+  assert.notEqual(sendAt, -1, 'the selected Telegram file ID must be sent');
+  assert.notEqual(updateAt, -1, 'the usage count must be incremented in the database');
+  assert.ok(sendAt < updateAt, 'usage count must only be incremented after Telegram successfully sends the GIF');
 });
 test('welcome and goodbye templates are read while handling Telegram messages', () => {
   const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
