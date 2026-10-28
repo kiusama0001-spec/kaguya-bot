@@ -531,9 +531,21 @@ async function sendWelcomeOrGoodbye(message: TelegramMessage): Promise<void> {
   if (message.left_chat_member && !message.left_chat_member.is_bot) {
     const template = await getMessageTemplate(chatId, "goodbye");
     const goodbyeText = settings?.goodbyeText?.trim() || template?.text?.trim();
+    const member = message.left_chat_member;
     if (goodbyeText || template?.imageFileId) {
-      const member = message.left_chat_member;
       await deliverTemplate(chatId, { text: personalize(goodbyeText || "Hasta luego, {name}.", member), imageFileId: template?.imageFileId }, `Hasta luego, ${fullName(member)}.`);
+    }
+
+    // Optional random farewell GIFs: upload several with /gifadd despedida, then /giffin.
+    // The category is optional, so existing groups without farewell GIFs behave as before.
+    const [farewellGif] = await db.select().from(gifRecords)
+      .where(eq(gifRecords.category, "despedida"))
+      .orderBy(sql`random()`).limit(1);
+    if (farewellGif) {
+      await sendTelegramAnimation(chatId, farewellGif.fileId);
+      await db.update(gifRecords)
+        .set({ usageCount: sql`${gifRecords.usageCount} + 1` })
+        .where(eq(gifRecords.id, farewellGif.id));
     }
   }
 }
