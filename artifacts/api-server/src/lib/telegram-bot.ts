@@ -536,16 +536,20 @@ async function sendWelcomeOrGoodbye(message: TelegramMessage): Promise<void> {
       await deliverTemplate(chatId, { text: personalize(goodbyeText || "Hasta luego, {name}.", member), imageFileId: template?.imageFileId }, `Hasta luego, ${fullName(member)}.`);
     }
 
-    // Optional random farewell GIFs: upload several with /gifadd despedida, then /giffin.
-    // The category is optional, so existing groups without farewell GIFs behave as before.
-    const [farewellGif] = await db.select().from(gifRecords)
-      .where(eq(gifRecords.category, "despedida"))
-      .orderBy(sql`random()`).limit(1);
-    if (farewellGif) {
-      await sendTelegramAnimation(chatId, farewellGif.fileId);
-      await db.update(gifRecords)
-        .set({ usageCount: sql`${gifRecords.usageCount} + 1` })
-        .where(eq(gifRecords.id, farewellGif.id));
+    // Send one random farewell GIF if the library has any in the "despedida" category.
+    // Groups without configured farewell GIFs keep their existing behavior.
+    try {
+      const [farewellGif] = await db.select().from(gifRecords)
+        .where(eq(gifRecords.category, "despedida"))
+        .orderBy(sql`random()`).limit(1);
+      if (farewellGif) {
+        await sendTelegramAnimation(chatId, farewellGif.fileId);
+        await db.update(gifRecords)
+          .set({ usageCount: sql`${gifRecords.usageCount} + 1` })
+          .where(eq(gifRecords.id, farewellGif.id));
+      }
+    } catch (error) {
+      logger.warn({ error: error instanceof Error ? error.message : "unknown" }, "Could not send farewell GIF");
     }
   }
 }
