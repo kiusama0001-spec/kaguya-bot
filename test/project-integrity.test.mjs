@@ -89,7 +89,7 @@ test('health endpoint reports database and bot separately and does not expose cr
 });
 test('each text, audio and image response has a single post-response memory write path', () => {
   const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
-  assert.equal((bot.match(/await saveConversationOnce\(/g) ?? []).length, 3);
+  assert.equal((bot.match(/await saveConversationOnce\(/g) ?? []).length, 4);
   assert.match(bot, /await saveConversationOnce\(chatId, userId, `\[Imagen\] \${question}`, answer\)/);
   assert.match(bot, /await saveConversationOnce\(chatId, userId, `\[Audio transcrito\] \${question}`, answer\)/);
   assert.match(bot, /One write path only/);
@@ -454,4 +454,28 @@ test('Kaguya emotion engine supports loneliness, jealousy, affection GIFs and a 
   assert.match(bot, /sendEmotionGif/);
   assert.match(bot, /lastLonelinessSentAt/);
   assert.match(bot, /KAGUYA_LONELY_AFTER_HOURS/);
+});
+
+
+test('Kaguya v3 provides a persistent private-chat menu and native Telegram command menu', () => {
+  const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
+  assert.match(bot, /async function sendKaguyaMenu/);
+  assert.match(bot, /is_persistent: true/);
+  assert.match(bot, /setMyCommands/);
+  assert.match(bot, /command === "menu"/);
+});
+
+test('Kaguya v3 keeps a local conversational personality when generative AI is disabled', () => {
+  const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
+  assert.match(bot, /function localKaguyaReply/);
+  assert.match(bot, /sendLocalKaguyaReply/);
+  assert.match(bot, /handleNaturalToolIntent/);
+  assert.match(bot, /if \(!await isAiEnabledForChat\(chatId\)\)/);
+});
+
+test('Kaguya v3 keeps admin ID controls strict and supports explicitly configured private username recovery', () => {
+  const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
+  assert.match(bot, /function canControlKiu/);
+  assert.match(bot, /KAGUYA_KIU_USERNAME/);
+  assert.match(bot, /message.chat.type === "private" && Boolean\(configuredUsername/);
 });
