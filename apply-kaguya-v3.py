@@ -257,7 +257,7 @@ async function handleNaturalToolIntent(chatId: string, text: string): Promise<bo
   return false;
 }
 
-async function handleMessage(message: TelegramMessage): Promise<void>'''
+async function handleMessage(message: TelegramMessage): Promise<void> {'''
 if "async function localKaguyaReply" not in bot:
     bot = replace_exact(bot, "async function handleMessage(message: TelegramMessage): Promise<void> {", local_engine, "insert local conversation and Telegram menu")
 else:
