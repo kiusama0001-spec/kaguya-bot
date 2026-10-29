@@ -346,6 +346,15 @@ bot = replace_exact(bot, '''    await sendTelegramMessage(chatId, `${helpText}${
     return;
   }''', "show keyboard menu after help")
 
+# The local conversational reply also saves its user/assistant pair, so this integrity count
+# rises from three (text/audio/image) to four (text/audio/image/local conversation).
+tests = replace_exact(
+    tests,
+    r'''assert.equal((bot.match(/await saveConversationOnce\(/g) ?? []).length, 3);''',
+    r'''assert.equal((bot.match(/await saveConversationOnce\(/g) ?? []).length, 4);''',
+    "update memory-write count for local conversation",
+)
+
 if "Kaguya v3 provides a persistent private-chat menu" not in tests:
     tests += r'''
 
