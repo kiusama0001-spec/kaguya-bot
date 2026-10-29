@@ -269,7 +269,7 @@ async function sendEmotionGif(chatId: string, categories: string[], caption: str
       .where(eq(gifRecords.category, category)).orderBy(sql`random()`).limit(1);
     if (!choice) continue;
     await sendTelegramAnimation(chatId, choice.fileId, caption);
-    await db.update(gifRecords).set({ usageCount: sql`${gifRecords.usageCount} + 1` }).where(eq(gifRecords.id, choice.id));
+    await db.update(gifRecords).set({ usageCount: sql`${gifRecords.usageCount} + ${1}` }).where(eq(gifRecords.id, choice.id));
     return true;
   }
   return false;
