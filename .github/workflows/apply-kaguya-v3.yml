@@ -1,0 +1,63 @@
+name: Apply Kaguya v3 - local chat and easy Telegram menu
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.8.1
+          run_install: false
+
+      - name: Apply Kaguya v3 patch
+        run: python apply-kaguya-v3.py
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run automated tests
+        run: pnpm test
+
+      - name: Typecheck and build
+        run: pnpm build
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: fix/kaguya-v3-local-chat-menu
+          delete-branch: true
+          title: "Kaguya v3: Kiu identity, local chat and easy Telegram menu"
+          body: |
+            ## Kaguya v3
+
+            - More reliable Kiu conversational identity across alternate accounts.
+            - Strict owner controls: numeric Telegram ID or explicitly configured username in private chat.
+            - A local, personalized conversation mode when generative AI is turned off or unavailable.
+            - Persistent Telegram reply keyboard with chat, humor, advice, Pokémon, BDSM, memory and AI settings.
+            - Natural-language Pokémon and BDSM requests; fewer slash commands.
+            - Register a concise native Telegram command menu.
+
+            Automated tests, typecheck and production build must pass before merge. After merge, Render should deploy the change.
+          base: main
