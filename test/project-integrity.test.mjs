@@ -437,3 +437,21 @@ test('wiki searches have persistent, configurable provider budgets before networ
   assert.match(read('.env.example'), /KAGUYA_WIKI_SEARCH_RPM=10/);
   assert.match(read('render.yaml'), /key: KAGUYA_WIKI_SEARCH_RPM/);
 });
+
+
+test('Kaguya has an owner-only AI switch and local phrase handling when AI is off', () => {
+  const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
+  assert.match(bot, /command === "ia"/);
+  assert.match(bot, /specialIdentityInstruction/);
+  assert.match(bot, /isAiEnabledForChat/);
+  assert.match(bot, /simplePhraseCategory/);
+});
+
+test('Kaguya emotion engine supports loneliness, jealousy, affection GIFs and a cooldown', () => {
+  const bot = read('artifacts/api-server/src/lib/telegram-bot.ts');
+  assert.match(bot, /checkKiuLoneliness/);
+  assert.match(bot, /maybeReactToOwnerFlirt/);
+  assert.match(bot, /sendEmotionGif/);
+  assert.match(bot, /lastLonelinessSentAt/);
+  assert.match(bot, /KAGUYA_LONELY_AFTER_HOURS/);
+});
